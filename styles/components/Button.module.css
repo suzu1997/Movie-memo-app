@@ -1,12 +1,18 @@
 .primaryButton {
   color: #fff;
   background-color: #82aaaa;
-  font-size: 12px;
-  padding: 8px;
+  font-size: 14px;
+  padding: 10px;
   border: none;
   border-radius: 10px;
   -webkit-box-shadow: 0 5px 0 darkolivegreen;
           box-shadow: 0 5px 0 darkolivegreen;
   outline: none;
+}
+
+.primaryButton:hover {
+  background-color: rgba(131, 170, 170, 0.87);
+  -webkit-box-shadow: 0 5px 0 rgba(85, 107, 47, 0.87);
+          box-shadow: 0 5px 0 rgba(85, 107, 47, 0.87);
 }
 /*# sourceMappingURL=Button.module.css.map */

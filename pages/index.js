@@ -15,14 +15,7 @@ export default function Home() {
       </Head>
       <Header />
       <Search />
-      <main className={classes.main}>
-        
-        <MyMovieList />
-        
-
-          
-      </main>
-
+      <MyMovieList />
       <Footer />
     </div>
   )

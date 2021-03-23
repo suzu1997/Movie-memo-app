@@ -16,13 +16,6 @@
           align-items: center;
 }
 
-.main {
-  padding: 0 0 0.5rem 0;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-
 @media (max-width: 600px) {
   .grid {
     width: 100%;

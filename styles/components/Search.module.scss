@@ -1,0 +1,25 @@
+.searchArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:  20px 15px;
+  background-color: #dbedf0;
+  width: 100%;
+}
+
+.input {
+  padding: 10px;
+  width: 200px;
+  margin-right: 8px;
+}
+
+.searchIcon {
+  border: 1.5px solid #000;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 35px;
+  margin-right: 10px;
+}

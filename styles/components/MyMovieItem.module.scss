@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  border: 1px solid #000;
+  border-bottom: none;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin-left: 15px;
+}
+
+.watchDate {
+  font-size: 0.7rem;
+  margin-right: 15px;
+}

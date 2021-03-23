@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EAET,MAAM,EAAE,SAAS;EACjB,aAAa,EAAE,cAAc;CAC9B;;AAED,AAAA,MAAM,CAAC;EACL,KAAK,EAAE,KAAK;EACZ,OAAO,EAAE,GAAG;EACZ,aAAa,EAAE,GAAG;EAClB,UAAU,EAAE,MAAM;EAClB,MAAM,EAAE,cAAc;EACtB,aAAa,EAAE,IAAI;EACnB,aAAa,EAAE,aAAa;EAC5B,WAAW,EAAE,MAAM;CAEpB",
+    "sources": [
+        "MyMovieList.module.scss"
+    ],
+    "names": [],
+    "file": "MyMovieList.module.css"
+}

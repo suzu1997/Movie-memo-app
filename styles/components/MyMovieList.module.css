@@ -2,7 +2,6 @@
   width: 95%;
   max-width: 600px;
   margin: 30px auto;
-  border-bottom: 1px solid #000;
   padding: 0;
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -18,5 +17,10 @@
   border-bottom: none;
   border-radius: 10px 10px 0 0;
   font-weight: normal;
+}
+
+.movieItems {
+  border: 1px solid #000;
+  padding-bottom: 66px;
 }
 /*# sourceMappingURL=MyMovieList.module.css.map */

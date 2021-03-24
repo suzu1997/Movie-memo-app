@@ -1,5 +1,6 @@
 import { MyMovieItem } from "./MyMovieItem";
 import classes from '../styles/components/MyMovieList.module.css';
+import { AddButton } from "./AddButton";
 
 export const MyMovieList = () => {
   return (
@@ -9,14 +10,24 @@ export const MyMovieList = () => {
           <div><a href="">+</a></div>
         </h2>
       </div>
-      <MyMovieItem />
-      <MyMovieItem />
-      <MyMovieItem />
-      <MyMovieItem />
-      <MyMovieItem />
-      <MyMovieItem />
-      <MyMovieItem />
-      <MyMovieItem />
+      <div className={classes.movieItems}>
+        <MyMovieItem />
+        <MyMovieItem />
+        <MyMovieItem />
+        <MyMovieItem />
+        <MyMovieItem />
+        <MyMovieItem />
+        <MyMovieItem />
+        <MyMovieItem />
+        <MyMovieItem />
+        <MyMovieItem />
+        <MyMovieItem />
+        <MyMovieItem />
+        <MyMovieItem />
+        
+      </div>
+      <AddButton>+</AddButton>
+      
     </div> 
   );
 };

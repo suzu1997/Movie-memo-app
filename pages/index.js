@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className={classes.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>movilove!!</title>
         <link rel="icon" href="/favicon.ico" />
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"/> 
       </Head>

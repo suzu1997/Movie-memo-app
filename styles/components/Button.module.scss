@@ -13,3 +13,24 @@
   box-shadow: 0 5px 0 rgba(85, 107, 47, 0.87);
   }
 }
+
+.addButton {
+  color: #fff;
+  background-color: #82aaaa;
+  font-size: 38px;
+  font-weight: bold;
+  // border: 1px solid darkolivegreen;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  width: 55px;
+  height: 55px;
+  line-height: 50px;
+  position: fixed;
+  right: 20px;
+  bottom: 15px;
+
+  &:hover {
+    background-color: rgba(131, 170, 170, 0.87);
+  }
+}

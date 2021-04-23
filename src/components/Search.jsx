@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import { getMoviesData } from 'src/api/movies';
-import classes from 'src/styles/components/Search.module.css';
 import { PrimaryButton } from 'src/components/atoms/button/PrimaryButton';
 import { SearchButton } from 'src/components/atoms/button/SearchButton';
 
@@ -22,9 +21,9 @@ export const Search = () => {
   }
 
   return (
-    <div className={classes.searchArea}>
+    <div className='w-full py-4 flex justify-center items-center bg-green-600 bg-opacity-20'>
       <input
-        className={classes.input}
+        className='p-2 w-56 mr-3'
         type='text'
         value={searchText}
         onChange={seachTextChange}

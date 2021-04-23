@@ -1,13 +1,8 @@
-import Link from 'next/link';
-import classes from 'src/styles/components/Button.module.css';
-
 export const SearchButton = (props) => {
   const { children, onClick } = props;
   return (
     <div>
-      {/* <Link href='/edit'> */}
-        <button className={classes.searchButton} onClick={onClick}>{children}</button>
-      {/* </Link> */}
+      <button className='rounded-full bg-gray-400 bg-opacity-50 w-11 h-11 text-center mr-3 hover:bg-opacity-80' onClick={onClick}>{children}</button>
     </div>
   );
 };

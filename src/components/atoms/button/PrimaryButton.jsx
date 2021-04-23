@@ -1,9 +1,7 @@
-import classes from 'src/styles/components/Button.module.css';
-
 export const PrimaryButton = (props) => {
   const { children, type } = props;
   return (
-    <button className={classes.primaryButton} type={type}>
+    <button className='text-white bg-green-700 text-sm p-3 border-none outline-none rounded-lg hover:bg-opacity-90' type={type}>
       {children}
     </button>
   );

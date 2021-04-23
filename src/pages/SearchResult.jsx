@@ -2,8 +2,6 @@ import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { MovieItem } from 'src/components/MovieItem';
 
-// import classes from 'src/styles/components/SearchResult.module.css';
-
 export const SearchResult = () => {
   const [open, setOpen] = useState(true);
 

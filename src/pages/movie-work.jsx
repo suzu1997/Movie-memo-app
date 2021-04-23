@@ -4,11 +4,10 @@ import { FavoriteButton } from 'src/components/atoms/button/FavoriteButton';
 import { Footer } from 'src/components/organisms/layout/Footer';
 import { Header } from 'src/components/organisms/layout/Header';
 import { PrimaryButton } from 'src/components/atoms/button/PrimaryButton';
-import classes from 'src/styles/Work.module.css';
 
 export default function MovieWork() {
   return (
-    <div className={classes.container}>
+    <div className='min-h-screen p-0 flex flex-col items-center'>
       <Head>
         <title>movilove!!</title>
         <link rel='icon' href='/favicon.ico' />
@@ -18,13 +17,13 @@ export default function MovieWork() {
         />
       </Head>
       <Header />
-      <div className={classes.main}>
-        <div className={classes.workTop}>
-          <img className={classes.img} src='prada.jpg' />
-          <div className={classes.btn}>
+      <div className='flex-grow w-4/5 max-w-lg pt-10'>
+        <div className='flex justify-center'>
+          <img className='w-52 h-52 block border-2 border-solid border-gray-800' src='prada.jpg' />
+          <div className='flex flex-col justify-center ml-10'>
             <Link href='/edit' passHref>
               <a>
-                <PrimaryButton className={classes.registerBtn}>
+                <PrimaryButton>
                   My Movieに登録
                 </PrimaryButton>
               </a>
@@ -32,7 +31,7 @@ export default function MovieWork() {
             <FavoriteButton>お気に入り</FavoriteButton>
           </div>
         </div>
-        <p className={classes.title}>タイトル: プラダを着た悪魔</p>
+        <p className='mt-10'>タイトル: プラダを着た悪魔</p>
         <p>制作年: 〇〇〇〇年</p>
         <p>ジャンル: ヒューマンドラマ</p>
         <p>

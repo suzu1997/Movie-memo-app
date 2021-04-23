@@ -1,30 +1,23 @@
-import classes from 'src/styles/components/SelectWatchDate.module.css';
-
 export const SelectWatchDate = () => {
   return (
-    <div className={classes.selectWatchDate}>
+    <div>
       <label>鑑賞日:</label>
       <br />
-      <select name='year'>
-        <option>2010</option>
-        <option>2011</option>
-        <option>2012</option>
-        <option>2013</option>
-        <option>2014</option>
+      <select className='p-2 border rounded-sm border-gray-500 border-solid' name='year'>
         <option>2015</option>
         <option>2016</option>
         <option>2017</option>
         <option>2018</option>
         <option>2019</option>
         <option>2020</option>
-        <option>2021</option>
+        <option selected>2021</option>
         <option>2022</option>
         <option>2023</option>
         <option>2024</option>
         <option>2025</option>
       </select>{' '}
       年{' '}
-      <select name='month'>
+      <select className='p-2 border rounded-sm border-gray-500 border-solid' name='month'>
         <option>01</option>
         <option>02</option>
         <option>03</option>
@@ -39,7 +32,7 @@ export const SelectWatchDate = () => {
         <option>12</option>
       </select>{' '}
       月{' '}
-      <select name='day'>
+      <select className='p-2 border rounded-sm border-gray-500 border-solid' name='day'>
         <option>01</option>
         <option>02</option>
         <option>03</option>

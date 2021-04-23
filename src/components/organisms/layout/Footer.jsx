@@ -1,5 +1,3 @@
-import classes from 'src/styles/components/Footer.module.css';
-
 export function Footer() {
-  return <footer className={classes.footer}>&copy;Chie Suzuhara 2021</footer>;
+  return <footer className='text-blue-700 bg-blue-500 bg-opacity-30 w-full h-16 flex justify-center items-center'>&copy;Chie Suzuhara 2021</footer>;
 }

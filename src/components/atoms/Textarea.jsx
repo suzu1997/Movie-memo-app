@@ -1,7 +1,5 @@
 import TextareaAutosize from 'react-textarea-autosize';
 
-import classes from 'src/styles/components/Textarea.module.css';
-
 export const Textarea = (props) => {
   const { label, placeholder } = props;
   return (
@@ -9,7 +7,7 @@ export const Textarea = (props) => {
       <label>{`${label}: `}</label>
       <br />
       <TextareaAutosize
-        className={classes.textarea}
+        className='w-full p-2 text-lg border rounded-sm border-gray-500 border-solid '
         placeholder={placeholder}
         minRows={13}
       />

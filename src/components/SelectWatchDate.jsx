@@ -1,4 +1,4 @@
-import classes from '../styles/components/SelectWatchDate.module.css';
+import classes from 'src/styles/components/SelectWatchDate.module.css';
 
 export const SelectWatchDate = () => {
   return (

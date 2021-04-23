@@ -1,6 +1,6 @@
-import { MyMovieItem } from './MyMovieItem';
-import classes from '../styles/components/MyMovieList.module.css';
-import { AddButton } from './AddButton';
+import { MyMovieItem } from 'src/components/MyMovieItem';
+import classes from 'src/styles/components/MyMovieList.module.css';
+import { AddButton } from 'src/components/atoms/button/AddButton';
 
 export const MyMovieList = () => {
   return (

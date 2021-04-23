@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import { Footer } from '../../components/Footer';
-import { Header } from '../../components/Header';
-import { Input } from '../../components/Input';
-import { SelectWatchDate } from '../../components/SelectWatchDate';
-import { Textarea } from '../../components/Textarea';
-import classes from '../styles/Edit.module.css';
+import { Footer } from 'src/components/organisms/layout/Footer';
+import { Header } from 'src/components/organisms/layout/Header';
+import { Input } from 'src/components/atoms/Input';
+import { SelectWatchDate } from 'src/components/SelectWatchDate';
+import { Textarea } from 'src/components/atoms/Textarea';
+import classes from 'src/styles/Edit.module.css';
 
 export default function Edit() {
   return (

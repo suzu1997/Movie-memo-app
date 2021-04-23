@@ -1,4 +1,4 @@
-import classes from '../styles/components/MyMovieItem.module.css';
+import classes from 'src/styles/components/MyMovieItem.module.css';
 
 export const MyMovieItem = () => {
   return (

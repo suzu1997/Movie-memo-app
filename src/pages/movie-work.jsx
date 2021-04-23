@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { FavoriteButton } from '../components/FavoriteButton';
-import { Footer } from '../components/Footer';
-import { Header } from '../components/Header';
-import { PrimaryButton } from '../components/PrimaryButton';
-import classes from '../styles/Work.module.css';
+import { FavoriteButton } from 'src/components/atoms/button/FavoriteButton';
+import { Footer } from 'src/components/organisms/layout/Footer';
+import { Header } from 'src/components/organisms/layout/Header';
+import { PrimaryButton } from 'src/components/atoms/button/PrimaryButton';
+import classes from 'src/styles/Work.module.css';
 
 export default function MovieWork() {
   return (

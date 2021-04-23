@@ -1,6 +1,6 @@
 import TextareaAutosize from 'react-textarea-autosize';
 
-import classes from '../styles/components/Textarea.module.css';
+import classes from 'src/styles/components/Textarea.module.css';
 
 export const Textarea = (props) => {
   const { label, placeholder } = props;

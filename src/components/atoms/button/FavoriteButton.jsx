@@ -1,4 +1,4 @@
-import classes from '../styles/components/Button.module.css';
+import classes from 'src/styles/components/Button.module.css';
 
 export const FavoriteButton = (props) => {
   const { children } = props;

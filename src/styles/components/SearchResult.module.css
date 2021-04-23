@@ -1,0 +1,13 @@
+.container {
+  width: 80%;
+  height: 70%;
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: #fff;
+  -webkit-box-shadow: 0 5px 10px;
+          box-shadow: 0 5px 10px;
+}
+/*# sourceMappingURL=SearchResult.module.css.map */

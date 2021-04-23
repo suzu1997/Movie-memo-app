@@ -1,28 +1,26 @@
-import Head from 'next/head'
+// import Head from 'next/head'
 
-import { Footer } from '../components/Footer'
-import { Header } from '../components/Header'
-import { MyMovieList } from '../components/MyMovieList'
-import { Search } from '../components/Search'
-import classes from '../styles/Home.module.css'
-import { getMovieList } from '../api/movies';
+import { Footer } from 'src/components/organisms/layout/Footer';
+import { Header } from 'src/components/organisms/layout/Header';
+import { MyMovieList } from 'src/components/MyMovieList';
+import { Search } from 'src/components/Search';
+import classes from 'src/styles/Home.module.css';
+import { getMoviesData } from 'src/api/movies';
+import { SearchResult } from 'src/pages/SearchResult';
 
 export default function Home() {
-
-  getMovieList();
-
   return (
     <div className={classes.container}>
-      <Head>
+      {/* <Head>
         <title>movilove!!</title>
         <link rel="icon" href="/favicon.ico" />
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"/> 
-      </Head>
+      </Head> */}
       <Header />
       <Search />
       <MyMovieList />
-      
+      <SearchResult />
       <Footer />
     </div>
-  )
+  );
 }

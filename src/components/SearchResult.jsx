@@ -1,10 +1,10 @@
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, memo, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+
 import { MovieItem } from 'src/components/MovieItem';
 
-export const SearchResult = () => {
-  const [open, setOpen] = useState(true);
-
+export const SearchResult = memo((props) => {
+  const { open, setOpen, searchResult } = props;
   const cancelButtonRef = useRef();
 
   return (
@@ -50,26 +50,26 @@ export const SearchResult = () => {
                   <div className='mt-3 text-center sm:mt-0 sm:ml-4'>
                     <Dialog.Title
                       as='h3'
-                      className='text-lg leading-6 font-medium text-gray-900'
+                      className='text-lg leading-6 font-medium text-gray-900 pb-7'
                     >
                       検索結果
                     </Dialog.Title>
                     <div>
-                      <MovieItem />
-                      <MovieItem />
-                      <MovieItem />
-                      <MovieItem />
-                      <MovieItem />
-                      <MovieItem />
+                      {searchResult ? (
+                        searchResult.map((movie) => {
+                          return <MovieItem key={movie.id} movie={movie} />;
+                        })
+                      ) : (
+                        <p>検索結果が見つかりませんでした。</p>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
               <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
-                
                 <button
                   type='button'
-                  className='mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
+                  className='mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 outline-none hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
                   onClick={() => setOpen(false)}
                   ref={cancelButtonRef}
                 >
@@ -82,4 +82,4 @@ export const SearchResult = () => {
       </Dialog>
     </Transition.Root>
   );
-}
+});

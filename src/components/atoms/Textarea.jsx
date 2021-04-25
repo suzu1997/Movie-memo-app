@@ -1,17 +1,17 @@
+import { memo } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
-export const Textarea = (props) => {
+export const Textarea = memo((props) => {
   const { label, placeholder } = props;
   return (
     <div>
       <label>{`${label}: `}</label>
       <br />
       <TextareaAutosize
-        className='w-full p-2 text-lg border rounded-sm border-gray-500 border-solid '
+        className='w-full p-2 text-lg border-2 rounded-md border-gray-400 border-solid focus:outline-none focus:border-black'
         placeholder={placeholder}
         minRows={13}
       />
     </div>
   );
-  Ï;
-};
+});

@@ -1,9 +1,11 @@
-export const SelectWatchDate = () => {
+import { memo } from "react";
+
+export const SelectWatchDate = memo(() => {
   return (
     <div>
       <label>鑑賞日:</label>
       <br />
-      <select className='p-2 border rounded-sm border-gray-500 border-solid' name='year'>
+      <select className='p-2 border-2 rounded-md border-gray-400 border-solid focus:outline-none focus:border-black' name='year'>
         <option>2015</option>
         <option>2016</option>
         <option>2017</option>
@@ -17,7 +19,7 @@ export const SelectWatchDate = () => {
         <option>2025</option>
       </select>{' '}
       年{' '}
-      <select className='p-2 border rounded-sm border-gray-500 border-solid' name='month'>
+      <select className='p-2 border-2 rounded-md border-gray-400 border-solid focus:outline-none focus:border-black' name='month'>
         <option>01</option>
         <option>02</option>
         <option>03</option>
@@ -32,7 +34,7 @@ export const SelectWatchDate = () => {
         <option>12</option>
       </select>{' '}
       月{' '}
-      <select className='p-2 border rounded-sm border-gray-500 border-solid' name='day'>
+      <select className='p-2 border-2 rounded-md border-gray-400 border-solid focus:outline-none focus:border-black' name='day'>
         <option>01</option>
         <option>02</option>
         <option>03</option>
@@ -68,4 +70,4 @@ export const SelectWatchDate = () => {
       日{' '}
     </div>
   );
-};
+});

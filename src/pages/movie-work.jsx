@@ -12,8 +12,6 @@ export default function MovieWork() {
   const { selectedMovie } = useSelectMovie();
   console.log(selectedMovie);
 
-  const releaseYear = selectedMovie.release_date.slice(0, 4);
-
   return (
     <div className='min-h-screen p-0 flex flex-col items-center'>
       <Head>
@@ -37,7 +35,7 @@ export default function MovieWork() {
         </div>
         <p className='mt-10'>{`タイトル: ${selectedMovie.title}`} </p>
         <br />
-        <p>{`制作年: ${releaseYear}年`}</p>
+        <p>{`制作年: ${selectedMovie.release_date.slice(0, 4)}年`}</p>
         <br />
         {/* <p>ジャンル: ヒューマンドラマ</p> */}
         <p>

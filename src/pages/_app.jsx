@@ -1,7 +1,8 @@
 import Head from 'next/head';
+import 'tailwindcss/tailwind.css';
 
 import 'src/styles/globals.css';
-import 'tailwindcss/tailwind.css';
+import { MovieContextProvider } from 'src/providers/SelectedMovieProvider'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -14,7 +15,9 @@ function MyApp({ Component, pageProps }) {
           rel='stylesheet'
         />
       </Head>
-      <Component {...pageProps} />
+      <MovieContextProvider>
+          <Component {...pageProps} />
+      </MovieContextProvider>
     </div>
   );
 }

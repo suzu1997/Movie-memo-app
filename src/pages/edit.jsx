@@ -20,12 +20,9 @@ export default function Edit() {
       <div className='flex-grow w-4/5 max-w-lg mx-auto my-10'>
         <Input label='タイトル' placeholder='何を観た？？👀' />
         <br />
-        <br />
         <SelectWatchDate />
         <br />
-        <br />
         <Input label='評価' />
-        <br />
         <br />
         <Textarea
           label='感想'

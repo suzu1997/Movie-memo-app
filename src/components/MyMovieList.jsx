@@ -1,7 +1,8 @@
 import { MyMovieItem } from 'src/components/MyMovieItem';
 import { AddButton } from 'src/components/atoms/button/AddButton';
+import { memo } from 'react';
 
-export const MyMovieList = () => {
+export const MyMovieList = memo(() => {
   return (
     <div className='w-11/12 max-w-screen-sm mx-auto my-8 p-0 flex-grow'>
       <div>
@@ -30,4 +31,4 @@ export const MyMovieList = () => {
       <AddButton>+</AddButton>
     </div>
   );
-};
+});

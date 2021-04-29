@@ -1,11 +1,19 @@
 import { Fragment, memo, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { MovieItem } from 'src/components/MovieItem';
 
 export const SearchResult = memo((props) => {
-  const { open, setOpen, searchResult } = props;
+  const { open, setOpen, searchResult, loading } = props;
   const cancelButtonRef = useRef();
+
+  let resultExist;
+  if (searchResult.length > 0) {
+    resultExist = true;
+  } else {
+    resultExist = false;
+  }
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -55,7 +63,11 @@ export const SearchResult = memo((props) => {
                       検索結果
                     </Dialog.Title>
                     <div>
-                      {searchResult ? (
+                      {loading ? (
+                        <div className='py-5' >
+                          <CircularProgress/>
+                        </div>
+                      ) : resultExist ? (
                         searchResult.map((movie) => {
                           return <MovieItem key={movie.id} movie={movie} />;
                         })

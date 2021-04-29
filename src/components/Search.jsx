@@ -1,8 +1,9 @@
+import { Input } from '@material-ui/core';
 import axios from 'axios';
 import { memo } from 'react';
 
 // import { getMoviesData } from 'src/api/movies';
-import { PrimaryButton } from 'src/components/atoms/button/PrimaryButton';
+// import { PrimaryButton } from 'src/components/atoms/button/PrimaryButton';
 import { SearchButton } from 'src/components/atoms/button/SearchButton';
 
 export const Search = memo((props) => {
@@ -11,6 +12,7 @@ export const Search = memo((props) => {
     searchText,
     setSearchText,
     setSearchResult,
+    setLoading,
   } = props;
 
   let isSearchable;
@@ -23,6 +25,7 @@ export const Search = memo((props) => {
   const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=ad57d2dd7d865020bf69b242c5fa7428&language=ja&query=${searchText}`;
 
   const searchMovies = () => {
+    setLoading(true);
     axios.defaults.headers.post['Content-Type'] =
       'application/x-www-form-urlencoded';
     axios
@@ -34,14 +37,17 @@ export const Search = memo((props) => {
       })
       .catch((err) => {
         console.log(err.response);
-      });
+      })
+      .finally(() => {
+        setLoading(false);
+      })
   };
 
   const seachTextChange = (e) => {
     setSearchText(e.target.value);
   };
 
-  const onClick = () => {
+  const onClickSearch = () => {
     //検索結果をsearchResultに入れ、SearchResultを開く
     searchMovies();
     handleClickOpen();
@@ -56,10 +62,10 @@ export const Search = memo((props) => {
         onChange={seachTextChange}
         placeholder='タイトルから映画を検索'
       />
-      <SearchButton onClick={onClick} isSearchable={isSearchable}>
+      <SearchButton onClickSearch={onClickSearch} isSearchable={isSearchable}>
         <i className='fas fa-search'></i>
       </SearchButton>
-      <PrimaryButton type='submit'>ジャンル検索</PrimaryButton>
+      {/* <PrimaryButton type='submit'>ジャンル検索</PrimaryButton> */}
     </div>
   );
 });

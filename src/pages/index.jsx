@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { Footer } from 'src/components/organisms/layout/Footer';
 import { Header } from 'src/components/organisms/layout/Header';
@@ -10,12 +10,13 @@ export default function Home() {
   //Search, SearchResult のstateはindex.jsxで管理
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const [searchResult, setSearchResult] = useState();
+  const [searchResult, setSearchResult] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   //映画の検索結果を開く関数
-  const handleClickOpen = () => {
+  const handleClickOpen = useCallback(() => {
     setOpen(true);
-  };
+  }, [setOpen]);
 
   return (
     <div className='min-h-screen p-0 flex flex-col items-center flex-grow'>
@@ -25,9 +26,10 @@ export default function Home() {
         searchText={searchText}
         setSearchText={setSearchText}
         setSearchResult={setSearchResult}
+        setLoading={setLoading}
       />
       <MyMovieList />
-      <SearchResult open={open} setOpen={setOpen} searchResult={searchResult} />
+      <SearchResult open={open} setOpen={setOpen} searchResult={searchResult} loading={loading}/>
       <Footer />
     </div>
   );

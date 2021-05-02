@@ -13,6 +13,7 @@ export const MyMovieList = memo(() => {
       //非同期処理
       await db
         .collection('movieNotes')
+        .orderBy('watchDate')
         .get()
         //movieNotesの中身が全てsnapshotsとして取得される(ドキュメント)
         .then((snapshots) => {
@@ -22,9 +23,10 @@ export const MyMovieList = memo(() => {
             const data = doc.data(); //中身のデータ  それぞれのオブジェクト
             movieNotes.push(data);
           });
-        }).catch((err) => {
-          console.log(err);
         })
+        .catch((err) => {
+          console.log(err);
+        });
       setMyMovies(movieNotes);
     })();
   }, []); //第二引数に空の配列⇨マウント時のみレンダー
@@ -38,7 +40,7 @@ export const MyMovieList = memo(() => {
       </div>
       <div className='border border-solid border-black pb-16'>
         {myMovies.map((myMovie) => {
-          return <MyMovieItem key={myMovie.title} myMovie={myMovie}/>
+          return <MyMovieItem key={myMovie.title} myMovie={myMovie} />;
         })}
       </div>
     </div>

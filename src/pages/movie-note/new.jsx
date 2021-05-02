@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Router from 'next/router';
-import axios from 'axios';
 
 import { Footer } from 'src/components/organisms/layout/Footer';
 import { Header } from 'src/components/organisms/layout/Header';
@@ -11,7 +10,7 @@ import { PrimaryButton } from 'src/components/atoms/button/PrimaryButton';
 import { useSelectMovie } from 'src/hooks/useSelectMovie';
 import { db } from 'src/firebase/index';
 
-export default function Edit() {
+export default function MovieNote() {
   const { selectedMovie } = useSelectMovie();
 
   const [evaluation, setEvaluation] = useState('');
@@ -19,9 +18,9 @@ export default function Edit() {
 
   const today = new Date();
 
-  const [year, setYear] = useState(today.getFullYear());
-  const [month, setMonth] = useState(today.getMonth() + 1);
-  const [day, setDay] = useState(today.getDate());
+  const [year, setYear] = useState(today.getFullYear().toString());
+  const [month, setMonth] = useState(('0' + (today.getMonth() + 1)).slice(-2));
+  const [day, setDay] = useState(('0'+today.getDate()).slice(-2));
 
   const onChangeYear = (e) => {
     setYear(e.target.value);
@@ -41,7 +40,8 @@ export default function Edit() {
   const onChangeImpression = (e) => {
     setImpression(e.target.value);
   };
-
+  
+  //映画メモを作成するための関数
   const onClickSave = async () => {
     const data = {
       title: `${selectedMovie.title}`,
@@ -49,6 +49,7 @@ export default function Edit() {
       year: `${year}`,
       month: `${month}`,
       day: `${day}`,
+      watchDate: `${year}${month}${day}`,
       evaluation: `${evaluation}`,
       impression: `${impression}`,
     };

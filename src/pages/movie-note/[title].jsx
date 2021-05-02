@@ -17,6 +17,10 @@ export default function MovieNote({ movieNote }) {
   const [evaluation, setEvaluation] = useState(movieNote.evaluation);
   const [impression, setImpression] = useState(movieNote.impression);
 
+  //DeleteComfirmDialog の開閉に関するstate
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  //テキストフィールドのvalueの変更のための関数
   const onChangeYear = (e) => {
     setYear(e.target.value);
   };
@@ -35,6 +39,16 @@ export default function MovieNote({ movieNote }) {
     setImpression(e.target.value);
   };
 
+  //DeleteComfirmDialog の開閉に関する関数
+  const handleClickDialogOpen = () => {
+    setDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
+
+  //映画メモのデータを変更する関数
   const onClickUpdate = async () => {
     const data = {
       title: `${movieNote.title}`,
@@ -42,6 +56,7 @@ export default function MovieNote({ movieNote }) {
       year: `${year}`,
       month: `${month}`,
       day: `${day}`,
+      watchDate: `${year}${month}${day}`,
       evaluation: `${evaluation}`,
       impression: `${impression}`,
     };
@@ -50,7 +65,7 @@ export default function MovieNote({ movieNote }) {
       .doc(movieNote.id)
       .set(data)
       .then(() => {
-        alert('更新しました');
+        alert('更新しました')
         Router.push('/');
       })
       .catch((err) => {
@@ -58,16 +73,7 @@ export default function MovieNote({ movieNote }) {
       });
   };
 
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  //映画メモを削除するための関数
   const onClickDelete = async () => {
     await db
       .collection('movieNotes')
@@ -96,7 +102,7 @@ export default function MovieNote({ movieNote }) {
           <PrimaryButton onClick={onClickUpdate}>更新</PrimaryButton>
           <button
             className='rounded-full bg-red-400 bg-opacity-50 w-11 h-11 text-center ml-4 hover:bg-opacity-80 focus:outline-none'
-            onClick={handleClickOpen}
+            onClick={handleClickDialogOpen}
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -146,8 +152,8 @@ export default function MovieNote({ movieNote }) {
         />
       </div>
       <DeleteConfirmDialog
-        open={open}
-        handleClose={handleClose}
+        open={dialogOpen}
+        handleClose={handleDialogClose}
         onClickDelete={onClickDelete}
       />
       <Footer />

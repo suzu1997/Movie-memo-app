@@ -2,8 +2,8 @@ import { memo } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
 export const Textarea = memo((props) => {
-  const {label, value, onChange, placeholder, } = props;
-  
+  const { label, value, onChange, placeholder } = props;
+
   return (
     <div>
       <label>{`${label}: `}</label>

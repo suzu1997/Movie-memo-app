@@ -1,23 +1,7 @@
-import { memo, useState } from 'react';
+import { memo } from 'react';
 
-export const SelectWatchDate = memo(() => {
-  const today = new Date();
-
-  const [year, setYear] = useState(today.getFullYear());
-  const [month, setMonth] = useState(today.getMonth() + 1);
-  const [day, setDay] = useState(today.getDate());
-
-  const onChangeYear = (e) => {
-    setYear(e.target.value);
-  };
-
-  const onChangeMonth = (e) => {
-    setMonth(e.target.value);
-  };
-
-  const onChangeDay = (e) => {
-    setDay(e.target.value);
-  };
+export const SelectWatchDate = memo((props) => {
+  const { year, month, day, onChangeYear, onChangeMonth, onChangeDay } = props;
 
   return (
     <div>

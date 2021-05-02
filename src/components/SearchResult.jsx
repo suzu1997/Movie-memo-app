@@ -64,8 +64,8 @@ export const SearchResult = memo((props) => {
                     </Dialog.Title>
                     <div>
                       {loading ? (
-                        <div className='py-5' >
-                          <CircularProgress/>
+                        <div className='py-5'>
+                          <CircularProgress />
                         </div>
                       ) : resultExist ? (
                         searchResult.map((movie) => {

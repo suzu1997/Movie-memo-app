@@ -1,4 +1,3 @@
-import { Input } from '@material-ui/core';
 import axios from 'axios';
 import { memo } from 'react';
 
@@ -32,7 +31,6 @@ export const Search = memo((props) => {
       .get(apiUrl)
       .then((res) => {
         const movies = res.data.results; //映画の情報が入ったオブジェクトの配列
-        console.log(movies);
         setSearchResult(movies);
       })
       .catch((err) => {
@@ -40,7 +38,7 @@ export const Search = memo((props) => {
       })
       .finally(() => {
         setLoading(false);
-      })
+      });
   };
 
   const seachTextChange = (e) => {
@@ -63,7 +61,20 @@ export const Search = memo((props) => {
         placeholder='タイトルから映画を検索'
       />
       <SearchButton onClickSearch={onClickSearch} isSearchable={isSearchable}>
-        <i className='fas fa-search'></i>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className='h-6 w-6 mx-auto'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='2'
+            d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+          />
+        </svg>
       </SearchButton>
       {/* <PrimaryButton type='submit'>ジャンル検索</PrimaryButton> */}
     </div>

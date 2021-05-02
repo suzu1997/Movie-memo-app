@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 export const Input = memo((props) => {
-  const { type, label, value, onChange, placeholder } = props;
+  const { type, label, value, onChange, placeholder, readOnly = false } = props;
   return (
     <div>
       {label ? <label>{`${label}: `}</label> : null}
@@ -12,6 +12,7 @@ export const Input = memo((props) => {
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        readOnly={readOnly}
       />
     </div>
   );

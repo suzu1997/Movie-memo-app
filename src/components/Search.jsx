@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { memo } from 'react';
 
-// import { getMoviesData } from 'src/api/movies';
-// import { PrimaryButton } from 'src/components/atoms/button/PrimaryButton';
 import { SearchButton } from 'src/components/atoms/button/SearchButton';
 
 export const Search = memo((props) => {
@@ -76,7 +74,6 @@ export const Search = memo((props) => {
           />
         </svg>
       </SearchButton>
-      {/* <PrimaryButton type='submit'>ジャンル検索</PrimaryButton> */}
     </div>
   );
 });

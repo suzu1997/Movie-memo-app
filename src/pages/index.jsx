@@ -8,7 +8,7 @@ import { SearchResult } from 'src/components/SearchResult';
 
 export default function Home() {
   //Search, SearchResult のstateはindex.jsxで管理
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);  //SearchResultを開くState
   const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ export default function Home() {
   }, [setOpen]);
 
   return (
-    <div className='min-h-screen p-0 flex flex-col items-center flex-grow'>
+    <div className='min-h-screen p-0 flex flex-col items-center'>
       <Header />
       <Search
         handleClickOpen={handleClickOpen}

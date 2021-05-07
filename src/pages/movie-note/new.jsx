@@ -6,7 +6,7 @@ import { Header } from 'src/components/layout/Header';
 import { PrimaryButton } from 'src/components/button/PrimaryButton';
 import { useSelectMovie } from 'src/hooks/useSelectMovie';
 import { createMovieNote } from 'src/lib/movieNotes';
-import { MovieNoteForm } from 'src/components/movie-note/movieNoteForm';
+import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 
 export default function MovieNote() {
   const { selectedMovie } = useSelectMovie();

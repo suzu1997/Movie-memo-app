@@ -11,7 +11,7 @@ import {
   getMovieNotesTitles,
   updateMovieNote,
 } from 'src/lib/movieNotes';
-import { MovieNoteForm } from 'src/components/movie-note/movieNoteForm';
+import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 
 export default function MovieNote({ movieNote }) {
   const [year, setYear] = useState(movieNote.year);

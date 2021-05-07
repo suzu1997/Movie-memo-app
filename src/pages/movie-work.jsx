@@ -1,14 +1,12 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
 
-// import { FavoriteButton } from 'src/components/atoms/button/FavoriteButton';
-import { Footer } from 'src/components/organisms/layout/Footer';
-import { Header } from 'src/components/organisms/layout/Header';
-import { PrimaryButton } from 'src/components/atoms/button/PrimaryButton';
+import { Footer } from 'src/components/layout/Footer';
+import { Header } from 'src/components/layout/Header';
+import { PrimaryButton } from 'src/components/button/PrimaryButton';
 import { useSelectMovie } from 'src/hooks/useSelectMovie';
-import { db } from 'src/firebase';
+import { searchMovieNote } from 'src/lib/movieNotes';
 
 export default function MovieWork() {
   const { selectedMovie } = useSelectMovie();
@@ -16,25 +14,13 @@ export default function MovieWork() {
 
   const releaseYear = selectedMovie.release_date.slice(0, 4);
 
-  const searchMovieNote = async () => {
-    const movieNote = [];
-    await db
-      .collection('movieNotes')
-      .where('title', '==', selectedMovie.title)
-      .get()
-      .then((snapshots) => {
-        snapshots.forEach((doc) => {
-          const data = doc.data();
-          movieNote.push(data);
-        });
-      });
+  //マウント時のみ
+  useEffect(async() => {
+    const movieNote = await searchMovieNote(selectedMovie.title);
     setMovieNote(movieNote);
-  };
-
-  useEffect(() => {
-    searchMovieNote();
   }, []);
 
+  //選んだ映画のメモを作成済かどうか
   let movieNoteExist;
   if (movieNote.length > 0) {
     movieNoteExist = true;
@@ -44,9 +30,6 @@ export default function MovieWork() {
 
   return (
     <div className='min-h-screen p-0 flex flex-col items-center'>
-      <Head>
-        <title>movilove!!</title>
-      </Head>
       <Header />
       <div className='flex-grow w-4/5 max-w-lg pt-10'>
         <div className='flex justify-center'>
@@ -73,7 +56,6 @@ export default function MovieWork() {
                 </a>
               </Link>
             )}
-            {/* <FavoriteButton>お気に入り</FavoriteButton> */}
           </div>
         </div>
         <p className='mt-10'>{`タイトル: ${selectedMovie.title}`} </p>

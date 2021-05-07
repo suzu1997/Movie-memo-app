@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Router from 'next/router';
 
-import { Footer } from 'src/components/organisms/layout/Footer';
-import { Header } from 'src/components/organisms/layout/Header';
-import { Input } from 'src/components/atoms/Input';
-import { SelectWatchDate } from 'src/components/SelectWatchDate';
-import { Textarea } from 'src/components/atoms/Textarea';
-import { PrimaryButton } from 'src/components/atoms/button/PrimaryButton';
+import { Footer } from 'src/components/layout/Footer';
+import { Header } from 'src/components/layout/Header';
+import { PrimaryButton } from 'src/components/button/PrimaryButton';
 import { DeleteConfirmDialog } from 'src/components/DeleteConfirmDialog';
-import { db } from 'src/firebase/index';
+import {
+  deleteMovieNote,
+  getMovieNoteData,
+  getMovieNotesTitles,
+  updateMovieNote,
+} from 'src/lib/movieNotes';
+import { MovieNoteForm } from 'src/components/movie-note/movieNoteForm';
 
 export default function MovieNote({ movieNote }) {
   const [year, setYear] = useState(movieNote.year);
@@ -20,73 +23,39 @@ export default function MovieNote({ movieNote }) {
   //DeleteComfirmDialog の開閉に関するstate
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  //テキストフィールドのvalueの変更のための関数
-  const onChangeYear = (e) => {
-    setYear(e.target.value);
-  };
-
-  const onChangeMonth = (e) => {
-    setMonth(e.target.value);
-  };
-
-  const onChangeDay = (e) => {
-    setDay(e.target.value);
-  };
-  const onChangeEvaluation = (e) => {
-    setEvaluation(e.target.value);
-  };
-  const onChangeImpression = (e) => {
-    setImpression(e.target.value);
-  };
-
   //DeleteComfirmDialog の開閉に関する関数
-  const handleClickDialogOpen = () => {
+  const handleClickDialogOpen = useCallback(() => {
     setDialogOpen(true);
-  };
+  }, []);
 
-  const handleDialogClose = () => {
+  const handleDialogClose = useCallback(() => {
     setDialogOpen(false);
+  }, []);
+
+  const data = {
+    title: `${movieNote.title}`,
+    src: `${movieNote.src}`,
+    year: `${year}`,
+    month: `${month}`,
+    day: `${day}`,
+    watchDate: `${year}${month}${day}`,
+    evaluation: `${evaluation}`,
+    impression: `${impression}`,
   };
 
-  //映画メモのデータを変更する関数
-  const onClickUpdate = async () => {
-    const data = {
-      title: `${movieNote.title}`,
-      src: `${movieNote.src}`,
-      year: `${year}`,
-      month: `${month}`,
-      day: `${day}`,
-      watchDate: `${year}${month}${day}`,
-      evaluation: `${evaluation}`,
-      impression: `${impression}`,
-    };
-    await db
-      .collection('movieNotes')
-      .doc(movieNote.id)
-      .set(data)
-      .then(() => {
-        alert('更新しました')
-        Router.push('/');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  //映画メモのデータを変更
+  const onClickUpdate = useCallback(async () => {
+    const id = movieNote.id;
+    await updateMovieNote(data, id);
+    Router.push('/');
+  }, [data]);
 
-  //映画メモを削除するための関数
-  const onClickDelete = async () => {
-    await db
-      .collection('movieNotes')
-      .doc(movieNote.id)
-      .delete()
-      .then(() => {
-        alert('削除しました');
-        Router.push('/');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  //映画メモを削除
+  const onClickDelete = useCallback(async () => {
+    const id = movieNote.id;
+    await deleteMovieNote(id);
+    Router.push('/');
+  }, [data]);
 
   return (
     <div className='min-h-screen p-0 flex flex-col items-center'>
@@ -120,35 +89,18 @@ export default function MovieNote({ movieNote }) {
             </svg>
           </button>
         </div>
-        <Input
-          type='text'
-          label='タイトル'
+        <MovieNoteForm
           value={movieNote.title}
-          readOnly={true}
-        />
-        <br />
-        <SelectWatchDate
           year={year}
           month={month}
           day={day}
-          onChangeYear={onChangeYear}
-          onChangeMonth={onChangeMonth}
-          onChangeDay={onChangeDay}
-        />
-        <br />
-        <Input
-          label='評価'
-          value={evaluation}
-          onChange={onChangeEvaluation}
-          placeholder='10点中何点？⭐️'
-        />
-        <br />
-        <Textarea
-          type='text'
-          label='感想'
-          value={impression}
-          onChange={onChangeImpression}
-          placeholder='映画に関する感想やメモを記録しておこう！！'
+          evaluation={evaluation}
+          impression={impression}
+          setYear={setYear}
+          setMonth={setMonth}
+          setDay={setDay}
+          setEvaluation={setEvaluation}
+          setImpression={setImpression}
         />
       </div>
       <DeleteConfirmDialog
@@ -161,57 +113,6 @@ export default function MovieNote({ movieNote }) {
   );
 }
 
-//titleの一覧を取得するための関数
-async function getMovieNotesTitles() {
-  const movieNotes = [];
-  await db
-    .collection('movieNotes')
-    .get()
-    //movieNotesの中身が全てsnapshotsとして取得される(ドキュメント)
-    .then((snapshots) => {
-      snapshots.forEach((doc) => {
-        console.log(doc);
-        const data = doc.data();
-        //中身のデータ  それぞれのオブジェクト
-        movieNotes.push(data);
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  return movieNotes.map((movieNote) => {
-    return {
-      params: {
-        title: String(movieNote.title),
-      },
-    };
-  });
-}
-
-//特定のtitleを使って、データベースからビルド時にデータを取得するための関数
-async function getMovieNoteData(title) {
-  let movieNote;
-  let id;
-  await db
-    .collection('movieNotes')
-    .where('title', '==', title)
-    .get()
-    .then((snapshots) => {
-      snapshots.forEach((doc) => {
-        const data = doc.data();
-        id = doc.id;
-        //中身のデータ  それぞれのオブジェクト
-        movieNote = data;
-        console.log(data);
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-  return { ...movieNote, id: String(id) };
-}
-
 //titleのとりうる値のリストを返す
 export async function getStaticPaths() {
   const paths = await getMovieNotesTitles();
@@ -220,7 +121,6 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-
 //titleに基づいて必要なデータを取得
 export async function getStaticProps({ params }) {
   const movieNote = await getMovieNoteData(params.title);

@@ -128,5 +128,6 @@ export async function getStaticProps({ params }) {
     props: {
       movieNote,
     },
+    revalidate: 3,
   };
 }

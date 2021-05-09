@@ -37,13 +37,14 @@ export default function MovieWork() {
             className='w-52 h-52 block border-2 border-solid border-gray-800'
             src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${selectedMovie.poster_path}`}
           />
-          <div className='flex flex-col justify-center ml-5 sm:ml-10'>
+          <div className='flex flex-col justify-center ml-3 sm:ml-10'>
             {/* 登録がまだの場合はmovie-note/newへ、登録済みの場合はmovie-note/[title]へ遷移*/}
             {movieNoteExist ? (
               <Link href={`/movie-note/${movieNote[0].title}`} passHref>
                 <a>
                   <PrimaryButton>
-                    noteを作成済 <i className='far fa-edit'></i>
+                    noteを作成済 <br />
+                    <i className='far fa-edit'></i>
                   </PrimaryButton>
                 </a>
               </Link>
@@ -51,7 +52,8 @@ export default function MovieWork() {
               <Link href='/movie-note/new' passHref>
                 <a>
                   <PrimaryButton>
-                    noteを作成 <i className='fas fa-plus'></i>
+                    noteを作成 <br />
+                    <i className='fas fa-plus'></i>
                   </PrimaryButton>
                 </a>
               </Link>

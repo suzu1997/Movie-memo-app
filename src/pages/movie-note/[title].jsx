@@ -63,7 +63,7 @@ export default function MovieNote({ movieNote }) {
       <div className='flex-grow w-4/5 max-w-lg mx-auto my-10'>
         <div className='flex justify-end'>
           <button
-            className='text-xs sm:text-sm block border border-solid border-black px-5 py-3 mr-4 rounded-lg hover:bg-gray-100 focus:outline-none'
+            className='text-xs sm:text-sm block border border-solid border-black px-4 py-3 mr-4 rounded-lg hover:bg-gray-100 focus:outline-none'
             onClick={() => Router.back()}
           >
             戻る

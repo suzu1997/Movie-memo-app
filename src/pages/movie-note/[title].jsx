@@ -118,7 +118,7 @@ export async function getStaticPaths() {
   const paths = await getMovieNotesTitles();
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 }
 //titleに基づいて必要なデータを取得

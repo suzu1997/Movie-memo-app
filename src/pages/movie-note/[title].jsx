@@ -15,11 +15,14 @@ import {
 import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 
 export default function MovieNote({ staticMovieNote }) {
-  const { data: movieNote , mutate } = useSWR(
+  const { data: movieNote, mutate } = useSWR(
     'firestore/movieNotes',
     getMovieNoteData(staticMovieNote.title),
     {
       initialData: staticMovieNote,
+      revalidateOnMount: true,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
     }
   );
 
@@ -135,7 +138,7 @@ export async function getStaticPaths() {
   };
 }
 //titleに基づいて必要なデータを取得
-export async function  getStaticProps({ params }) {
+export async function getStaticProps({ params }) {
   const staticMovieNote = await getMovieNoteData(params.title);
   return {
     props: {

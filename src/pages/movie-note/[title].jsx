@@ -14,21 +14,31 @@ import {
 } from 'src/lib/movieNotes';
 import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 
-export default function MovieNote({ movieNote }) {
-  // const { data: movieNote, mutate } = useSWR(
-  //   'firestore/movieNotes',
-  //   getMovieNoteData(initialData.title),
-  //   {
-  //     initialData,
-  //     revalidateOnMount: true,
-  //     revalidateOnFocus: false,
-  //     revalidateOnReconnect: false,
-  //   }
-  // );
+export default function MovieNote({ movieNote: initialData }) {
 
-  // useEffect(() => {
-  //   mutate();
-  // }, []);
+  const fetcher = async () => {
+    let MovieNote;
+    console.log(initialData);
+    await db
+      .collection('movieNotes')
+      .doc(`${initialData.id}`)
+      .get()
+      .then((doc) => {
+        MovieNote = doc.data();
+      });
+    return movieNote;
+  };
+
+  const { data: movieNote, mutate } = useSWR('firestore/movieNotes', fetcher, {
+    initialData,
+    revalidateOnMount: true,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+
+  useEffect(() => {
+    mutate();
+  }, []);
 
   const [year, setYear] = useState(movieNote.year);
   const [month, setMonth] = useState(movieNote.month);
@@ -144,6 +154,6 @@ export async function getStaticProps({ params }) {
     props: {
       movieNote,
     },
-    revalidate: 3,
+    revalidate: 5,
   };
 }

@@ -1,5 +1,6 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Router from 'next/router';
+import useSWR from 'swr';
 
 import { Footer } from 'src/components/layout/Footer';
 import { Header } from 'src/components/layout/Header';
@@ -13,7 +14,19 @@ import {
 } from 'src/lib/movieNotes';
 import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 
-export default function MovieNote({ movieNote }) {
+export default function MovieNote({ staticMovieNote }) {
+  const { data: movieNote , mutate } = useSWR(
+    'firestore/movieNotes',
+    getMovieNoteData(staticMovieNote.title),
+    {
+      initialData: staticMovieNote,
+    }
+  );
+
+  useEffect(() => {
+    mutate();
+  }, []);
+
   const [year, setYear] = useState(movieNote.year);
   const [month, setMonth] = useState(movieNote.month);
   const [day, setDay] = useState(movieNote.day);
@@ -122,11 +135,11 @@ export async function getStaticPaths() {
   };
 }
 //titleに基づいて必要なデータを取得
-export async function getStaticProps({ params }) {
-  const movieNote = await getMovieNoteData(params.title);
+export async function  getStaticProps({ params }) {
+  const staticMovieNote = await getMovieNoteData(params.title);
   return {
     props: {
-      movieNote,
+      staticMovieNote,
     },
     revalidate: 3,
   };

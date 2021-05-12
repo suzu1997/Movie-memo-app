@@ -43,7 +43,7 @@ export const getMovieNotesTitles = async () => {
   });
 };
 
-//特定のtitleを使って、データベースからビルド時にデータを取得するための関数
+//特定のtitleを使って、データベースからデータを取得するための関数
 export const getMovieNoteData = async (title) => {
   let movieNote;
   let id;

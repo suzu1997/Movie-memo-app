@@ -14,21 +14,21 @@ import {
 } from 'src/lib/movieNotes';
 import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 
-export default function MovieNote({ staticMovieNote }) {
+export default function MovieNote({ movieNote: initialData }) {
   const { data: movieNote, mutate } = useSWR(
     'firestore/movieNotes',
-    getMovieNoteData(staticMovieNote.title),
+    getMovieNoteData(initialData.title),
     {
-      initialData: staticMovieNote,
+      initialData,
       revalidateOnMount: true,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
     }
   );
 
-  // useEffect(() => {
-  //   mutate();
-  // }, []);
+  useEffect(() => {
+    mutate();
+  }, []);
 
   const [year, setYear] = useState(movieNote.year);
   const [month, setMonth] = useState(movieNote.month);
@@ -139,10 +139,10 @@ export async function getStaticPaths() {
 }
 //titleに基づいて必要なデータを取得
 export async function getStaticProps({ params }) {
-  const staticMovieNote = await getMovieNoteData(params.title);
+  const movieNote = await getMovieNoteData(params.title);
   return {
     props: {
-      staticMovieNote,
+      movieNote,
     },
     revalidate: 3,
   };

@@ -26,9 +26,9 @@ export default function MovieNote({ staticMovieNote }) {
     }
   );
 
-  useEffect(() => {
-    mutate();
-  }, []);
+  // useEffect(() => {
+  //   mutate();
+  // }, []);
 
   const [year, setYear] = useState(movieNote.year);
   const [month, setMonth] = useState(movieNote.month);

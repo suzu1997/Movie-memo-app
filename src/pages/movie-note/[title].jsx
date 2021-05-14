@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import Router from 'next/router';
-import useSWR from 'swr';
 
 import { Footer } from 'src/components/layout/Footer';
 import { Header } from 'src/components/layout/Header';
@@ -15,29 +14,16 @@ import {
 import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 
 export default function MovieNote({ movieNote: initialData }) {
+  const [ movieNote, setMovieNote ] = useState(initialData);
 
   const fetcher = async () => {
-    let MovieNote;
-    console.log(initialData);
-    await db
-      .collection('movieNotes')
-      .doc(`${initialData.id}`)
-      .get()
-      .then((doc) => {
-        MovieNote = doc.data();
-      });
-    return movieNote;
+    const result = await getMovieNoteData(initialData.title);
+    console.log(result);
+    setMovieNote(result);
   };
 
-  const { data: movieNote, mutate } = useSWR('firestore/movieNotes', fetcher, {
-    initialData,
-    revalidateOnMount: true,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
-
   useEffect(() => {
-    mutate();
+    fetcher();
   }, []);
 
   const [year, setYear] = useState(movieNote.year);

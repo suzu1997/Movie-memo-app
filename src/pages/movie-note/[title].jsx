@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
 
 import { Footer } from 'src/components/layout/Footer';
 import { Header } from 'src/components/layout/Header';
@@ -12,23 +13,18 @@ import {
   updateMovieNote,
 } from 'src/lib/movieNotes';
 import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
-import useSWR from 'swr';
 
 export default function MovieNote({ initialData }) {
   const router = useRouter();
 
-  if (router.isFallback) {
-    return <div>Loading...</div>
-  }
-
-  const { data: movieNote, mutate } = useSWR(
-    'movieNotes',
-    getMovieNoteData(initialData.title),
-    {
-      initialData: initialData,
-    }
-  );
-
+  const {
+    data: movieNote,
+    mutate,
+    error,
+  } = useSWR('movieNotes', () => getMovieNoteData(initialData.title), {
+    initialData: initialData,
+  });
+  
   const [year, setYear] = useState(movieNote.year);
   const [month, setMonth] = useState(movieNote.month);
   const [day, setDay] = useState(movieNote.day);
@@ -60,21 +56,31 @@ export default function MovieNote({ initialData }) {
 
   //映画メモのデータを変更
   const onClickUpdate = useCallback(async () => {
-    const id = movieNote.id;
+    const id = initialData.id;
     await updateMovieNote(data, id);
-    Router.push('/');
+    mutate({ ...data });
+    router.push('/');
   }, [data]);
 
   //映画メモを削除
   const onClickDelete = useCallback(async () => {
-    const id = movieNote.id;
+    const id = initialData.id;
     await deleteMovieNote(id);
-    Router.push('/');
+    mutate('movieNotes');
+    router.push('/');
   }, [data]);
 
   useEffect(() => {
     mutate();
   }, []);
+
+  if (error) {
+    console.log(error);
+    return <div>failed to load</div>;
+  }
+  if (!movieNote) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className='min-h-screen p-0 flex flex-col items-center'>
@@ -83,7 +89,7 @@ export default function MovieNote({ initialData }) {
         <div className='flex justify-end'>
           <button
             className='text-xs sm:text-sm block border border-solid border-black px-4 py-3 mr-4 rounded-lg hover:bg-gray-100 focus:outline-none'
-            onClick={() => Router.back()}
+            onClick={() => router.back()}
           >
             戻る
           </button>
@@ -137,7 +143,7 @@ export async function getStaticPaths() {
   const paths = await getMovieNotesTitles();
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   };
 }
 //titleに基づいて必要なデータを取得

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 
 import { Footer } from 'src/components/layout/Footer';
 import { Header } from 'src/components/layout/Header';
@@ -12,19 +12,22 @@ import {
   updateMovieNote,
 } from 'src/lib/movieNotes';
 import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
+import useSWR from 'swr';
 
-export default function MovieNote({ movieNote: initialData }) {
-  const [ movieNote, setMovieNote ] = useState(initialData);
+export default function MovieNote({ initialData }) {
+  const router = useRouter();
 
-  const fetcher = async () => {
-    const result = await getMovieNoteData(initialData.title);
-    console.log(result);
-    setMovieNote(result);
-  };
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
 
-  useEffect(() => {
-    fetcher();
-  }, []);
+  const { data: movieNote, mutate } = useSWR(
+    'movieNotes',
+    getMovieNoteData(initialData.title),
+    {
+      initialData: initialData,
+    }
+  );
 
   const [year, setYear] = useState(movieNote.year);
   const [month, setMonth] = useState(movieNote.month);
@@ -68,6 +71,10 @@ export default function MovieNote({ movieNote: initialData }) {
     await deleteMovieNote(id);
     Router.push('/');
   }, [data]);
+
+  useEffect(() => {
+    mutate();
+  }, []);
 
   return (
     <div className='min-h-screen p-0 flex flex-col items-center'>
@@ -130,15 +137,15 @@ export async function getStaticPaths() {
   const paths = await getMovieNotesTitles();
   return {
     paths,
-    fallback: 'blocking',
+    fallback: true,
   };
 }
 //titleに基づいて必要なデータを取得
 export async function getStaticProps({ params }) {
-  const movieNote = await getMovieNoteData(params.title);
+  const initialData = await getMovieNoteData(params.title);
   return {
     props: {
-      movieNote,
+      initialData,
     },
     revalidate: 5,
   };

@@ -28,7 +28,6 @@ export default function MovieNote({ initialData }) {
       initialData: initialData,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-      revalidateOnMount: true,
     }
   );
 
@@ -155,5 +154,6 @@ export async function getStaticProps({ params }) {
     props: {
       initialData,
     },
+    revalidate: 5,
   };
 }

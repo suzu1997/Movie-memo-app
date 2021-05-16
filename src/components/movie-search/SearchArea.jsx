@@ -19,7 +19,7 @@ export const SearchArea = memo((props) => {
     isSearchable = false;
   }
 
-  const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=ad57d2dd7d865020bf69b242c5fa7428&language=ja&query=${searchText}`;
+  const apiUrl = `${process.env.NEXT_PUBLIC_MOVIE_API_URL}query=${searchText}`;
 
   const seachTextChange = useCallback((e) => {
     setSearchText(e.target.value);

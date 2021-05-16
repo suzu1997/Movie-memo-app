@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import Router from 'next/router';
+import {useRouter} from 'next/router';
 
 import { Footer } from 'src/components/layout/Footer';
 import { Header } from 'src/components/layout/Header';
@@ -9,6 +9,8 @@ import { createMovieNote } from 'src/lib/movieNotes';
 import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 
 export default function MovieNote() {
+  const router = useRouter();
+
   const { selectedMovie } = useSelectMovie();
 
   const [evaluation, setEvaluation] = useState('');
@@ -35,7 +37,7 @@ export default function MovieNote() {
   //映画メモを作成
   const onClickSave = useCallback(async () => {
     await createMovieNote(data);
-    Router.push('/');
+    router.push('/');
   }, [data]);
 
   return (
@@ -45,7 +47,7 @@ export default function MovieNote() {
         <div className='flex justify-end'>
           <button
             className='text-xs sm:text-sm block border border-solid border-black px-4 py-3 mr-4 rounded-lg hover:bg-gray-100 focus:outline-none'
-            onClick={() => Router.back()}
+            onClick={() => router.back()}
           >
             戻る
           </button>

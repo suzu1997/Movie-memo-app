@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Router from 'next/router';
+import {useRouter} from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { Footer } from 'src/components/layout/Footer';
@@ -9,6 +9,8 @@ import { useSelectMovie } from 'src/hooks/useSelectMovie';
 import { searchMovieNote } from 'src/lib/movieNotes';
 
 export default function MovieWork() {
+  const router = useRouter();
+
   const { selectedMovie } = useSelectMovie();
   const [movieNote, setMovieNote] = useState([]);
 
@@ -71,7 +73,7 @@ export default function MovieWork() {
         </p>
         <button
           className='text-xs sm:text-sm my-6 mx-auto block border border-solid border-black px-4 py-2 rounded-lg hover:bg-gray-100 focus:outline-none'
-          onClick={() => Router.back()}
+          onClick={() => router.back()}
         >
           戻る
         </button>

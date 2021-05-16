@@ -23,6 +23,9 @@ export default function MovieNote({ initialData }) {
     error,
   } = useSWR('movieNotes', () => getMovieNoteData(initialData.title), {
     initialData: initialData,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    revalidateOnMount: true,
   });
   
   const [year, setYear] = useState(movieNote.year);
@@ -153,6 +156,5 @@ export async function getStaticProps({ params }) {
     props: {
       initialData,
     },
-    revalidate: 5,
   };
 }

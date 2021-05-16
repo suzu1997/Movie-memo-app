@@ -22,7 +22,7 @@ export const MovieNoteForm = (props) => {
   //テキストフィールドのvalueの変更のための関数
   const onChangeYear = useCallback((e) => {
     setYear(e.target.value);
-  }, [setYear]);
+  }, []);
   const onChangeMonth = useCallback((e) => {
     setMonth(e.target.value);
   }, []);

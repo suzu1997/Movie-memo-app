@@ -21,13 +21,17 @@ export default function MovieNote({ initialData }) {
     data: movieNote,
     mutate,
     error,
-  } = useSWR('movieNotes', () => getMovieNoteData(initialData.title), {
-    initialData: initialData,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-    revalidateOnMount: true,
-  });
-  
+  } = useSWR(
+    ['movieNotes', initialData.title],
+    () => getMovieNoteData(initialData.title),
+    {
+      initialData: initialData,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateOnMount: true,
+    }
+  );
+
   const [year, setYear] = useState(movieNote.year);
   const [month, setMonth] = useState(movieNote.month);
   const [day, setDay] = useState(movieNote.day);
@@ -69,7 +73,6 @@ export default function MovieNote({ initialData }) {
   const onClickDelete = useCallback(async () => {
     const id = initialData.id;
     await deleteMovieNote(id);
-    mutate('movieNotes');
     router.push('/');
   }, [data]);
 
@@ -81,10 +84,6 @@ export default function MovieNote({ initialData }) {
     console.log(error);
     return <div>failed to load</div>;
   }
-  if (!movieNote) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className='min-h-screen p-0 flex flex-col items-center'>
       <Header />
@@ -156,5 +155,6 @@ export async function getStaticProps({ params }) {
     props: {
       initialData,
     },
+    revalidate: 5,
   };
 }

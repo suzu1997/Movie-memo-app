@@ -18,12 +18,15 @@ export const SearchArea = memo((props) => {
   } else {
     isSearchable = false;
   }
-
+  // eslint-disable-next-line no-undef
   const apiUrl = `${process.env.NEXT_PUBLIC_MOVIE_API_URL}query=${searchText}`;
 
-  const seachTextChange = useCallback((e) => {
-    setSearchText(e.target.value);
-  }, []);
+  const seachTextChange = useCallback(
+    (e) => {
+      setSearchText(e.target.value);
+    },
+    [setSearchText]
+  );
 
   const createMovieList = async () => {
     const movies = await searchMovies(apiUrl);
@@ -36,6 +39,7 @@ export const SearchArea = memo((props) => {
     setLoading(true);
     handleClickOpen();
     createMovieList(searchText);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
 
   return (

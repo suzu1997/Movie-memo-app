@@ -5,7 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { MovieItem } from 'src/components/movie-search/MovieItem';
 
 export const SearchResult = memo((props) => {
-  const { open, setOpen, searchResult,loading } = props;
+  const { open, setOpen, searchResult, loading } = props;
   const cancelButtonRef = useRef();
 
   let resultExist;

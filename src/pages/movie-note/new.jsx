@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 
 import { Footer } from 'src/components/layout/Footer';
 import { Header } from 'src/components/layout/Header';
@@ -38,6 +38,7 @@ export default function MovieNote() {
   const onClickSave = useCallback(async () => {
     await createMovieNote(data);
     router.push('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { memo } from 'react';
 
-export const AddButton = memo((props) => {
+export const AddButton = memo(() => {
   return (
     <>
       <Link href='/edit'>

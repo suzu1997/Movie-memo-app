@@ -20,21 +20,36 @@ export const MovieNoteForm = (props) => {
   } = props;
 
   //テキストフィールドのvalueの変更のための関数
-  const onChangeYear = useCallback((e) => {
-    setYear(e.target.value);
-  }, []);
-  const onChangeMonth = useCallback((e) => {
-    setMonth(e.target.value);
-  }, []);
-  const onChangeDay = useCallback((e) => {
-    setDay(e.target.value);
-  }, []);
-  const onChangeEvaluation = useCallback((e) => {
-    setEvaluation(e.target.value);
-  }, []);
-  const onChangeImpression = useCallback((e) => {
-    setImpression(e.target.value);
-  }, []);
+  const onChangeYear = useCallback(
+    (e) => {
+      setYear(e.target.value);
+    },
+    [setYear]
+  );
+  const onChangeMonth = useCallback(
+    (e) => {
+      setMonth(e.target.value);
+    },
+    [setMonth]
+  );
+  const onChangeDay = useCallback(
+    (e) => {
+      setDay(e.target.value);
+    },
+    [setDay]
+  );
+  const onChangeEvaluation = useCallback(
+    (e) => {
+      setEvaluation(e.target.value);
+    },
+    [setEvaluation]
+  );
+  const onChangeImpression = useCallback(
+    (e) => {
+      setImpression(e.target.value);
+    },
+    [setImpression]
+  );
 
   return (
     <div>

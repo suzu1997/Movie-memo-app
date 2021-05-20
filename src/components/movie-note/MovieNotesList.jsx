@@ -9,9 +9,9 @@ export const MovieNotesList = memo(() => {
   const [movieNotes, setMovieNotes] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
     setLoading(true);
-    const movieNotes = await getMovieNotesData();
+    const movieNotes = getMovieNotesData();
     setMovieNotes(movieNotes);
     setLoading(false);
   }, []);
@@ -24,7 +24,7 @@ export const MovieNotesList = memo(() => {
         </h2>
       </div>
       <ul className='border border-solid border-black flex-grow pb-16'>
-      {loading ? (
+        {loading ? (
           <div>
             <SkeletonLoading />
             <SkeletonLoading />

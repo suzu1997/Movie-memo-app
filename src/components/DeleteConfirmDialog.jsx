@@ -19,10 +19,18 @@ export const DeleteConfirmDialog = memo((props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color='primary' className='focus:outline-none'>
+          <Button
+            onClick={handleClose}
+            color='primary'
+            className='focus:outline-none'
+          >
             キャンセル
           </Button>
-          <Button onClick={onClickDelete} color='primary' className='focus:outline-none'>
+          <Button
+            onClick={onClickDelete}
+            color='primary'
+            className='focus:outline-none'
+          >
             削除する
           </Button>
         </DialogActions>

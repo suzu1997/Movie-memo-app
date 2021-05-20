@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { Footer } from 'src/components/layout/Footer';
@@ -17,9 +17,10 @@ export default function MovieWork() {
   const releaseYear = selectedMovie.release_date.slice(0, 4);
 
   //マウント時のみ
-  useEffect(async() => {
-    const movieNote = await searchMovieNote(selectedMovie.title);
+  useEffect(() => {
+    const movieNote = searchMovieNote(selectedMovie.title);
     setMovieNote(movieNote);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //選んだ映画のメモを作成済かどうか

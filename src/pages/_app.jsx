@@ -2,7 +2,7 @@ import Head from 'next/head';
 import 'tailwindcss/tailwind.css';
 
 import 'src/styles/globals.css';
-import { MovieContextProvider } from 'src/providers/SelectedMovieProvider'
+import { MovieContextProvider } from 'src/providers/SelectedMovieProvider';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <MovieContextProvider>
-          <Component {...pageProps} />
+        <Component {...pageProps} />
       </MovieContextProvider>
     </div>
   );

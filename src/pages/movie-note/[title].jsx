@@ -66,6 +66,7 @@ export default function MovieNote({ initialData }) {
     await updateMovieNote(data, id);
     mutate({ ...data });
     router.push('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   //映画メモを削除
@@ -73,10 +74,12 @@ export default function MovieNote({ initialData }) {
     const id = initialData.id;
     await deleteMovieNote(id);
     router.push('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   useEffect(() => {
     mutate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (error) {

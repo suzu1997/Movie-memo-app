@@ -11,7 +11,9 @@ export const MovieNoteItem = memo((props) => {
           alt='映画のサムネイル'
           className='w-10 h-10 sm:w-12 sm:h-12'
         />
-        <p className='text-sm ml-2 mr-1 break-words sm:ml-4 sm:text-base'>{movieNote.title}</p>
+        <p className='text-sm ml-2 mr-1 break-words sm:ml-4 sm:text-base'>
+          {movieNote.title}
+        </p>
       </div>
       <div className='flex items-center'>
         <div className='text-xs sm:text-sm sm:mr-4 whitespace-nowrap'>

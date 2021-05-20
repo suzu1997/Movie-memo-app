@@ -18,8 +18,10 @@ export default function MovieWork() {
 
   //マウント時のみ
   useEffect(() => {
-    const movieNote = searchMovieNote(selectedMovie.title);
-    setMovieNote(movieNote);
+    (async () => {
+      const movieNote = await searchMovieNote(selectedMovie.title);
+      setMovieNote(movieNote);
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

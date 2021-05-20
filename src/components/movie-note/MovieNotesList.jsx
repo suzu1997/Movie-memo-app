@@ -10,10 +10,12 @@ export const MovieNotesList = memo(() => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    const movieNotes = getMovieNotesData();
-    setMovieNotes(movieNotes);
-    setLoading(false);
+    (async () => {
+      setLoading(true);
+      const movieNotes = await getMovieNotesData();
+      setMovieNotes(movieNotes);
+      setLoading(false);
+    })();
   }, []);
 
   return (

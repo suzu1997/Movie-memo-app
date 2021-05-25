@@ -5,7 +5,7 @@ import { searchMovies } from 'src/lib/searchMovies';
 
 export const SearchArea = memo((props) => {
   const {
-    handleClickOpen,
+    setOpen,
     searchText,
     setSearchText,
     setSearchResult,
@@ -37,7 +37,7 @@ export const SearchArea = memo((props) => {
 
   const onClickSearch = useCallback(() => {
     setLoading(true);
-    handleClickOpen();
+    setOpen(true);
     createMovieList(searchText);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);

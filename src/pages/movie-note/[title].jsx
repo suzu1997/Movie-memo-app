@@ -66,7 +66,7 @@ export default function MovieNote({ initialData }) {
   }, [data]);
 
   useEffect(() => {
-    mutate();
+    mutate(['movieNotes', initialData.title]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

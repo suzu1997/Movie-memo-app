@@ -17,7 +17,7 @@ export const MovieNoteButton = (props) => {
         {onClickSave ? (
           <PrimaryButton onClick={onClickSave}>保存</PrimaryButton>
         ) : (
-          <div>
+          <>
             <PrimaryButton onClick={onClickUpdate}>更新</PrimaryButton>
             <button
               className='rounded-full bg-red-400 bg-opacity-50 w-11 h-11 text-center ml-4 hover:bg-opacity-80 focus:outline-none'
@@ -38,7 +38,7 @@ export const MovieNoteButton = (props) => {
                 />
               </svg>
             </button>
-          </div>
+          </>
         )}
       </div>
     </div>

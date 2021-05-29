@@ -51,7 +51,7 @@ export default function MovieNote({ initialData }) {
   const onClickUpdate = useCallback(async () => {
     const id = initialData.id;
     await updateMovieNote(data, id);
-    mutate({ ...data });
+    mutate(['movieNotes', initialData.title]);
     router.push('/');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);

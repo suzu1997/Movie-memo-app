@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-// import useSWR from 'swr';
 
 import { Footer } from 'src/components/layout/Footer';
 import { Header } from 'src/components/layout/Header';
@@ -18,20 +17,6 @@ import { useMovieNote } from 'src/hooks/useMovieNote';
 export default function MovieNote({ initialData }) {
   const router = useRouter();
   const { movieNote, mutate, error } = useMovieNote(initialData);
-
-  // const {
-  //   data: movieNote,
-  //   mutate,
-  //   error,
-  // } = useSWR(
-  //   ['movieNotes', initialData.title],
-  //   () => getMovieNoteData(initialData.title),
-  //   {
-  //     initialData: initialData,
-  //     revalidateOnFocus: false,
-  //     revalidateOnReconnect: false,
-  //   }
-  // );
 
   const [year, setYear] = useState(movieNote.year);
   const [month, setMonth] = useState(movieNote.month);

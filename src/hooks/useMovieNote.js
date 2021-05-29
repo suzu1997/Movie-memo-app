@@ -11,6 +11,7 @@ export const useMovieNote = (initialData) => {
     () => getMovieNoteData(initialData.title),
     {
       initialData: initialData,
+      revalidateOnMount: true,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
     }

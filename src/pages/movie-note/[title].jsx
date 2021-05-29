@@ -73,6 +73,7 @@ export default function MovieNote({ initialData }) {
   const onClickDelete = useCallback(async () => {
     const id = initialData.id;
     await deleteMovieNote(id);
+    mutate(['movieNotes', initialData.title]);
     router.push('/');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);

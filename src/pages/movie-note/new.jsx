@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 
 import { Footer } from 'src/components/layout/Footer';
 import { Header } from 'src/components/layout/Header';
-import { PrimaryButton } from 'src/components/button/PrimaryButton';
 import { useSelectMovie } from 'src/hooks/useSelectMovie';
 import { createMovieNote } from 'src/lib/movieNotes';
 import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 import { useMovieNote } from 'src/hooks/useMovieNote';
+import { MovieNoteButton } from 'src/components/movie-note/MovieNoteButton';
 
 export default function MovieNote() {
   const router = useRouter();
@@ -48,15 +48,7 @@ export default function MovieNote() {
     <div className='min-h-screen p-0 flex flex-col items-center'>
       <Header />
       <div className='flex-grow w-4/5 max-w-lg mx-auto my-10'>
-        <div className='flex justify-end'>
-          <button
-            className='text-xs sm:text-sm block border border-solid border-black px-4 py-3 mr-4 rounded-lg hover:bg-gray-100 focus:outline-none'
-            onClick={() => router.back()}
-          >
-            戻る
-          </button>
-          <PrimaryButton onClick={onClickSave}>保存</PrimaryButton>
-        </div>
+        <MovieNoteButton onClickSave={onClickSave} />
         <MovieNoteForm
           value={selectedMovie.title}
           year={year}

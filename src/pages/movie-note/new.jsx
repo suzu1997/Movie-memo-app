@@ -7,11 +7,13 @@ import { PrimaryButton } from 'src/components/button/PrimaryButton';
 import { useSelectMovie } from 'src/hooks/useSelectMovie';
 import { createMovieNote } from 'src/lib/movieNotes';
 import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
+import { useMovieNote } from 'src/hooks/useMovieNote';
 
 export default function MovieNote() {
   const router = useRouter();
 
   const { selectedMovie } = useSelectMovie();
+  const { mutate } = useMovieNote(selectedMovie);
 
   const [evaluation, setEvaluation] = useState('');
   const [impression, setImpression] = useState('');
@@ -37,6 +39,7 @@ export default function MovieNote() {
   //映画メモを作成
   const onClickSave = useCallback(async () => {
     await createMovieNote(data);
+    mutate(['movieNotes', selectedMovie.title]);
     router.push('/');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);

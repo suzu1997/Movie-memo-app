@@ -9,7 +9,7 @@ import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 import { useMovieNote } from 'src/hooks/useMovieNote';
 import { MovieNoteButton } from 'src/components/movie-note/MovieNoteButton';
 
-export default function MovieNote() {
+const MovieNote = () => {
   const router = useRouter();
 
   const { selectedMovie } = useSelectMovie();
@@ -66,4 +66,6 @@ export default function MovieNote() {
       <Footer />
     </div>
   );
-}
+};
+
+export default MovieNote;

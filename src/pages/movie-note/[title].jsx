@@ -14,7 +14,7 @@ import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 import { useMovieNote } from 'src/hooks/useMovieNote';
 import { MovieNoteButton } from 'src/components/movie-note/MovieNoteButton';
 
-export default function MovieNote({ initialData }) {
+const MovieNote = ({ initialData }) => {
   const router = useRouter();
   const { movieNote, mutate, error } = useMovieNote(initialData);
 
@@ -104,7 +104,7 @@ export default function MovieNote({ initialData }) {
       <Footer />
     </div>
   );
-}
+};
 
 //titleのとりうる値のリストを返す
 export async function getStaticPaths() {
@@ -124,3 +124,5 @@ export async function getStaticProps({ params }) {
     revalidate: 5,
   };
 }
+
+export default MovieNote;

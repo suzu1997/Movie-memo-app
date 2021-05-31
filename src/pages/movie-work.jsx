@@ -8,7 +8,7 @@ import { PrimaryButton } from 'src/components/button/PrimaryButton';
 import { useSelectMovie } from 'src/hooks/useSelectMovie';
 import { searchMovieNote } from 'src/lib/movieNotes';
 
-export default function MovieWork() {
+const MovieWork = () => {
   const router = useRouter();
 
   const { selectedMovie } = useSelectMovie();
@@ -84,4 +84,6 @@ export default function MovieWork() {
       <Footer />
     </div>
   );
-}
+};
+
+export default MovieWork;

@@ -4,7 +4,7 @@ import 'tailwindcss/tailwind.css';
 import 'src/styles/globals.css';
 import { MovieContextProvider } from 'src/providers/SelectedMovieProvider';
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
   return (
     <div>
       <Head>
@@ -20,6 +20,6 @@ function MyApp({ Component, pageProps }) {
       </MovieContextProvider>
     </div>
   );
-}
+};
 
 export default MyApp;

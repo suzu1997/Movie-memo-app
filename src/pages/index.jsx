@@ -6,7 +6,7 @@ import { MovieNotesList } from 'src/components/movie-note/MovieNotesList';
 import { SearchArea } from 'src/components/movie-search/SearchArea';
 import { SearchResult } from 'src/components/movie-search/SearchResult';
 
-export default function Home() {
+const Home = () => {
   //SearchArea, SearchResult のstateはindex.jsxで管理
   const [open, setOpen] = useState(false); //SearchResultを開くState
   const [searchText, setSearchText] = useState('');
@@ -33,4 +33,6 @@ export default function Home() {
       <Footer />
     </div>
   );
-}
+};
+
+export default Home;

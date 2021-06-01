@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, VFC } from 'react';
 
 import { Footer } from 'src/components/layout/Footer';
 import { Header } from 'src/components/layout/Header';
@@ -8,13 +8,13 @@ import { PrimaryButton } from 'src/components/button/PrimaryButton';
 import { useSelectMovie } from 'src/hooks/useSelectMovie';
 import { searchMovieNote } from 'src/lib/movieNotes';
 
-const MovieWork = () => {
+const MovieWork: VFC = () => {
   const router = useRouter();
 
   const { selectedMovie } = useSelectMovie();
   const [movieNote, setMovieNote] = useState([]);
 
-  const releaseYear = selectedMovie.release_date.slice(0, 4);
+  const releaseYear: string = selectedMovie.release_date.slice(0, 4);
 
   //マウント時のみ
   useEffect(() => {
@@ -26,7 +26,7 @@ const MovieWork = () => {
   }, []);
 
   //選んだ映画のメモを作成済かどうか
-  let movieNoteExist;
+  let movieNoteExist: boolean;
   if (movieNote.length > 0) {
     movieNoteExist = true;
   } else {

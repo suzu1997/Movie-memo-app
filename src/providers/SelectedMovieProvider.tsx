@@ -1,8 +1,12 @@
-import { createContext, useState } from 'react';
+import { createContext, ReactNode, useState, VFC } from 'react';
 
-export const MovieContext = createContext();
+export const MovieContext = createContext(null);
 
-export const MovieContextProvider = (props) => {
+type Props = {
+  children: ReactNode;
+}
+
+export const MovieContextProvider: VFC<Props>= (props) => {
   const { children } = props;
   const [selectedMovie, setSelectedMovie] = useState({
     poster_path: '',

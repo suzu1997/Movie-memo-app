@@ -1,7 +1,8 @@
 import { db } from 'src/firebase/index';
+import { MovieNoteData } from 'src/types/movieNoteData';
 
 //firestoreからmovieNotesのデータを取得する関数
-export const getMovieNotesData = async () => {
+export const getMovieNotesData: () => Promise<Array<MovieNoteData>> = async () => {
   const movieNotes = [];
   //非同期処理
   await db
@@ -21,7 +22,13 @@ export const getMovieNotesData = async () => {
 };
 
 //titleの一覧を取得するための関数
-export const getMovieNotesTitles = async () => {
+export const getMovieNotesTitles: () => Promise<
+  {
+    params: {
+      title: string;
+    };
+  }[]
+> = async () => {
   const movieNotes = [];
   await db
     .collection('movieNotes')
@@ -44,27 +51,30 @@ export const getMovieNotesTitles = async () => {
 };
 
 //特定のtitleを使って、データベースからデータを取得するための関数
-export const getMovieNoteData = async (title) => {
-  let movieNote;
-  let id;
-  await db
-    .collection('movieNotes')
-    .where('title', '==', title)
-    .get()
-    .then((snapshots) => {
-      snapshots.forEach((doc) => {
-        const data = doc.data();
-        id = doc.id;
-        //中身のデータ  それぞれのオブジェクト
-        movieNote = data;
+export const getMovieNoteData: (title: string | string[]) => Promise<any> =
+  async (title) => {
+    let movieNote;
+    let id;
+    await db
+      .collection('movieNotes')
+      .where('title', '==', title)
+      .get()
+      .then((snapshots) => {
+        snapshots.forEach((doc) => {
+          const data = doc.data();
+          id = doc.id;
+          //中身のデータ  それぞれのオブジェクト
+          movieNote = data;
+        });
       });
-    });
 
-  return { ...movieNote, id: String(id) };
-};
+    return { ...movieNote, id: String(id) };
+  };
 
 //映画メモを作成するための関数
-export const createMovieNote = async (data) => {
+export const createMovieNote: (data: MovieNoteData) => Promise<void> = async (
+  data
+) => {
   await db
     .collection('movieNotes')
     .add(data)
@@ -77,21 +87,22 @@ export const createMovieNote = async (data) => {
 };
 
 //映画メモのデータを変更する関数
-export const updateMovieNote = async (data, id) => {
-  await db
-    .collection('movieNotes')
-    .doc(id)
-    .set(data)
-    .then(() => {
-      alert('映画メモを更新しました。');
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+export const updateMovieNote: (data: MovieNoteData, id: string) => Promise<void> =
+  async (data, id) => {
+    await db
+      .collection('movieNotes')
+      .doc(id)
+      .set(data)
+      .then(() => {
+        alert('映画メモを更新しました。');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
 //映画メモを削除するための関数
-export const deleteMovieNote = async (id) => {
+export const deleteMovieNote: (id: string) => Promise<void> = async (id) => {
   await db
     .collection('movieNotes')
     .doc(id)
@@ -104,17 +115,18 @@ export const deleteMovieNote = async (id) => {
     });
 };
 
-export const searchMovieNote = async (title) => {
-  const movieNote = [];
-  await db
-    .collection('movieNotes')
-    .where('title', '==', title)
-    .get()
-    .then((snapshots) => {
-      snapshots.forEach((doc) => {
-        const data = doc.data();
-        movieNote.push(data);
+export const searchMovieNote: (title: string) => Promise<Array<MovieNoteData>> =
+  async (title) => {
+    const movieNote = [];
+    await db
+      .collection('movieNotes')
+      .where('title', '==', title)
+      .get()
+      .then((snapshots) => {
+        snapshots.forEach((doc) => {
+          const data = doc.data();
+          movieNote.push(data);
+        });
       });
-    });
-  return movieNote;
-};
+    return movieNote;
+  };

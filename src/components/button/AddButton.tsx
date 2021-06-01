@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { memo } from 'react';
+import { memo, VFC } from 'react';
 
-export const AddButton = memo(() => {
+export const AddButton: VFC = memo(() => {
   return (
     <>
       <Link href='/edit'>

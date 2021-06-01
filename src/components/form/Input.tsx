@@ -1,6 +1,15 @@
-import { memo } from 'react';
+import { ChangeEventHandler, memo, VFC } from 'react';
 
-export const Input = memo((props) => {
+type Props = {
+  type: string;
+  label: string;
+  value: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  placeholder?: string;
+  readOnly?: boolean;
+};
+
+export const Input: VFC<Props> = memo((props) => {
   const { type, label, value, onChange, placeholder, readOnly = false } = props;
   return (
     <div>

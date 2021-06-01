@@ -3,8 +3,10 @@ import 'tailwindcss/tailwind.css';
 
 import 'src/styles/globals.css';
 import { MovieContextProvider } from 'src/providers/SelectedMovieProvider';
+import { VFC } from 'react';
+import { AppProps } from 'next/dist/next-server/lib/router/router';
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp: VFC = ({ Component, pageProps }: AppProps) => {
   return (
     <div>
       <Head>

@@ -1,41 +1,47 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, VFC } from 'react';
 
 import { SearchButton } from 'src/components/button/SearchButton';
 import { searchMovies } from 'src/lib/searchMovies';
+import { MovieInfo } from 'src/types/movieInfo';
 
-export const SearchArea = memo((props) => {
-  const {
-    setOpen,
-    searchText,
-    setSearchText,
-    setSearchResult,
-    setLoading,
-  } = props;
+type Props = {
+  setOpen: (boolean: boolean) => void;
+  searchText: string;
+  setSearchText: (value: string) => void;
+  setSearchResult: (movies: Array<MovieInfo>) => void;
+  setLoading: (boolean: boolean) => void;
+};
 
-  let isSearchable;
+export const SearchArea: VFC<Props> = memo((props) => {
+  const { setOpen, searchText, setSearchText, setSearchResult, setLoading } =
+    props;
+
+  let isSearchable: boolean;
   if (searchText) {
     isSearchable = true;
   } else {
     isSearchable = false;
   }
   // eslint-disable-next-line no-undef
-  const apiUrl = `${process.env.NEXT_PUBLIC_MOVIE_API_URL}query=${searchText}`;
 
   const seachTextChange = useCallback(
-    (e) => {
+    (e): void => {
       setSearchText(e.target.value);
     },
     [setSearchText]
   );
 
-  const createMovieList = async () => {
+  const createMovieList: (searchText: string) => Promise<void> = async (
+    searchText
+  ) => {
+    const apiUrl = `${process.env.NEXT_PUBLIC_MOVIE_API_URL}query=${searchText}`;
     const movies = await searchMovies(apiUrl);
     setSearchResult(movies);
     setLoading(false);
     setSearchText('');
   };
 
-  const onClickSearch = useCallback(() => {
+  const onClickSearch: () => void = useCallback(() => {
     setLoading(true);
     setOpen(true);
     createMovieList(searchText);

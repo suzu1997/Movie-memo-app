@@ -1,6 +1,11 @@
-import { memo } from 'react';
+import { memo, VFC } from 'react';
+import { MovieNoteData } from 'src/types/movieNoteData';
 
-export const MovieNoteItem = memo((props) => {
+type Props = {
+  movieNote: MovieNoteData;
+};
+
+export const MovieNoteItem: VFC<Props> = memo((props) => {
   const { movieNote } = props;
 
   return (

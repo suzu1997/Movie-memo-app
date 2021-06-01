@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 
 import { Footer } from 'src/components/layout/Footer';
@@ -8,8 +8,9 @@ import { createMovieNote } from 'src/lib/movieNotes';
 import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 import { useMovieNote } from 'src/hooks/useMovieNote';
 import { MovieNoteButton } from 'src/components/movie-note/MovieNoteButton';
+import { MovieNoteData } from 'src/types/movieNoteData';
 
-const MovieNote = () => {
+const MovieNote: VFC= () => {
   const router = useRouter();
 
   const { selectedMovie } = useSelectMovie();
@@ -19,13 +20,13 @@ const MovieNote = () => {
   const [impression, setImpression] = useState('');
 
   //SelectWatchDateの値を、その日の日付で初期設定する
-  const today = new Date();
+  const today: Date = new Date();
 
   const [year, setYear] = useState(today.getFullYear().toString());
   const [month, setMonth] = useState(('0' + (today.getMonth() + 1)).slice(-2));
   const [day, setDay] = useState(('0' + today.getDate()).slice(-2));
 
-  const data = {
+  const data: MovieNoteData = {
     title: `${selectedMovie.title}`,
     src: `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${selectedMovie.poster_path}`,
     year: `${year}`,
@@ -37,7 +38,7 @@ const MovieNote = () => {
   };
 
   //映画メモを作成
-  const onClickSave = useCallback(async () => {
+  const onClickSave: () => void = useCallback(async () => {
     await createMovieNote(data);
     mutate(['movieNotes', selectedMovie.title]);
     router.push('/');

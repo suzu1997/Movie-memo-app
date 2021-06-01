@@ -1,10 +1,24 @@
-import { useCallback } from 'react';
+import { ChangeEventHandler, useCallback, VFC } from 'react';
 
 import { Input } from 'src/components/form/Input';
 import { SelectWatchDate } from 'src/components/form/SelectWatchDate';
 import { Textarea } from 'src/components/form/Textarea';
 
-export const MovieNoteForm = (props) => {
+type Props = {
+  value: string;
+  year: string;
+  month: string;
+  day: string;
+  evaluation: string;
+  impression: string;
+  setYear: (value: string) => void;
+  setMonth: (value: string) => void;
+  setDay: (value: string) => void;
+  setEvaluation: (value: string) => void;
+  setImpression: (value: string) => void;
+};
+
+export const MovieNoteForm: VFC<Props> = (props) => {
   const {
     value,
     year,
@@ -20,36 +34,37 @@ export const MovieNoteForm = (props) => {
   } = props;
 
   //テキストフィールドのvalueの変更のための関数
-  const onChangeYear = useCallback(
+  const onChangeYear: ChangeEventHandler<HTMLSelectElement> = useCallback(
     (e) => {
       setYear(e.target.value);
     },
     [setYear]
   );
-  const onChangeMonth = useCallback(
+  const onChangeMonth: ChangeEventHandler<HTMLSelectElement> = useCallback(
     (e) => {
       setMonth(e.target.value);
     },
     [setMonth]
   );
-  const onChangeDay = useCallback(
+  const onChangeDay: ChangeEventHandler<HTMLSelectElement> = useCallback(
     (e) => {
       setDay(e.target.value);
     },
     [setDay]
   );
-  const onChangeEvaluation = useCallback(
+  const onChangeEvaluation: ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
       setEvaluation(e.target.value);
     },
     [setEvaluation]
   );
-  const onChangeImpression = useCallback(
-    (e) => {
-      setImpression(e.target.value);
-    },
-    [setImpression]
-  );
+  const onChangeImpression: ChangeEventHandler<HTMLTextAreaElement> =
+    useCallback(
+      (e) => {
+        setImpression(e.target.value);
+      },
+      [setImpression]
+    );
 
   return (
     <div>
@@ -65,6 +80,7 @@ export const MovieNoteForm = (props) => {
       />
       <br />
       <Input
+        type='text'
         label='評価'
         value={evaluation}
         onChange={onChangeEvaluation}
@@ -72,7 +88,6 @@ export const MovieNoteForm = (props) => {
       />
       <br />
       <Textarea
-        type='text'
         label='感想'
         value={impression}
         onChange={onChangeImpression}

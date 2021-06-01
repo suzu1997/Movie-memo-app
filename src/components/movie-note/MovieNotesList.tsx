@@ -1,11 +1,11 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useState, VFC } from 'react';
 import Link from 'next/link';
 
 import { MovieNoteItem } from 'src/components/movie-note/MovieNoteItem';
 import { SkeletonLoading } from 'src/components/SkeletonLoading';
 import { getMovieNotesData } from 'src/lib/movieNotes';
 
-export const MovieNotesList = memo(() => {
+export const MovieNotesList: VFC= memo(() => {
   const [movieNotes, setMovieNotes] = useState([]);
   const [loading, setLoading] = useState(false);
 

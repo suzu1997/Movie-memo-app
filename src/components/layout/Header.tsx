@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { memo } from 'react';
+import { memo, VFC } from 'react';
 
-export const Header = memo(() => {
+export const Header: VFC = memo(() => {
   return (
     <header className='text-blue-700 font-bold bg-blue-500 bg-opacity-30 w-full h-12 sm:h-14 flex items-center'>
       <Link href='/'>

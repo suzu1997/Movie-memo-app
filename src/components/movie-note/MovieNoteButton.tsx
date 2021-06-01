@@ -1,9 +1,19 @@
 import { useRouter } from 'next/router';
+import {
+  MouseEventHandler,
+  VFC,
+} from 'react-transition-group/node_modules/@types/react';
 import { PrimaryButton } from 'src/components/button/PrimaryButton';
 
-export const MovieNoteButton = (props) => {
+type Props = {
+  onClickSave?: MouseEventHandler<HTMLButtonElement>;
+  onClickUpdate?: MouseEventHandler<HTMLButtonElement>;
+  onClickDialogOpen?: MouseEventHandler<HTMLButtonElement>;
+};
+
+export const MovieNoteButton: VFC<Props> = (props) => {
   const router = useRouter();
-  const { onClickSave, onClickUpdate, handleClickDialogOpen } = props;
+  const { onClickSave, onClickUpdate, onClickDialogOpen } = props;
 
   return (
     <div>
@@ -21,7 +31,7 @@ export const MovieNoteButton = (props) => {
             <PrimaryButton onClick={onClickUpdate}>更新</PrimaryButton>
             <button
               className='rounded-full bg-red-400 bg-opacity-50 w-11 h-11 text-center ml-4 hover:bg-opacity-80 focus:outline-none'
-              onClick={handleClickDialogOpen}
+              onClick={onClickDialogOpen}
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'

@@ -1,7 +1,8 @@
 import { getMovieNoteData } from 'src/lib/movieNotes';
+import { MovieNoteData } from 'src/types/movieNoteData';
 import useSWR from 'swr';
 
-export const useMovieNote = (initialData) => {
+export const useMovieNote = (initialData: MovieNoteData): any => {
   const {
     data: movieNote,
     mutate,

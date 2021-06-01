@@ -1,14 +1,22 @@
-import { Fragment, memo, useRef } from 'react';
+import { Fragment, memo, useRef, VFC } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { MovieItem } from 'src/components/movie-search/MovieItem';
+import { MovieInfo } from 'src/types/movieInfo';
 
-export const SearchResult = memo((props) => {
+type Props = {
+  open: boolean;
+  setOpen: (boolean: boolean) => void;
+  searchResult: Array<MovieInfo>;
+  loading: boolean;
+};
+
+export const SearchResult: VFC<Props> = memo((props) => {
   const { open, setOpen, searchResult, loading } = props;
   const cancelButtonRef = useRef();
 
-  let resultExist;
+  let resultExist: boolean;
   if (searchResult.length > 0) {
     resultExist = true;
   } else {

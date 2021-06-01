@@ -1,6 +1,11 @@
-import { memo } from 'react';
+import { memo, MouseEventHandler, ReactNode, VFC } from 'react';
 
-export const PrimaryButton = memo((props) => {
+type Props = {
+  children: ReactNode;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+};
+
+export const PrimaryButton: VFC<Props> = memo((props) => {
   const { children, onClick } = props;
   return (
     <button

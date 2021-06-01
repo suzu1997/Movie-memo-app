@@ -1,16 +1,21 @@
 import Link from 'next/link';
-import { memo } from 'react';
+import { memo, VFC } from 'react';
 import { useSelectMovie } from 'src/hooks/useSelectMovie';
+import { MovieInfo } from 'src/types/movieInfo';
 
-export const MovieItem = memo((props) => {
+type Props = {
+  movie: MovieInfo;
+};
+
+export const MovieItem: VFC<Props> = memo((props) => {
   const { setSelectedMovie } = useSelectMovie();
 
   const { movie } = props;
-  const selectMovie = () => {
+  const selectMovie = (): void => {
     setSelectedMovie(movie);
   };
 
-  const releaseYear = movie.release_date.slice(0, 4);
+  const releaseYear: string = movie.release_date.slice(0, 4);
 
   return (
     <Link href='/movie-work'>

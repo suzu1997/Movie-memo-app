@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, VFC } from 'react';
 
 import { Footer } from 'src/components/layout/Footer';
 import { Header } from 'src/components/layout/Header';
@@ -6,7 +6,7 @@ import { MovieNotesList } from 'src/components/movie-note/MovieNotesList';
 import { SearchArea } from 'src/components/movie-search/SearchArea';
 import { SearchResult } from 'src/components/movie-search/SearchResult';
 
-const Home = () => {
+const Home: VFC = () => {
   //SearchArea, SearchResult のstateはindex.jsxで管理
   const [open, setOpen] = useState(false); //SearchResultを開くState
   const [searchText, setSearchText] = useState('');

@@ -1,6 +1,11 @@
-import { memo } from 'react';
+import { memo, MouseEventHandler, VFC } from 'react';
 
-export const SearchButton = memo((props) => {
+type Props = {
+  onClickSearch: MouseEventHandler<HTMLButtonElement>;
+  isSearchable: boolean;
+}
+
+export const SearchButton:VFC<Props> = memo((props) => {
   const { onClickSearch, isSearchable } = props;
   return (
     <div>

@@ -1,4 +1,6 @@
-export const SkeletonLoading = () => {
+import { VFC } from 'react-transition-group/node_modules/@types/react';
+
+export const SkeletonLoading: VFC = () => {
   return (
     <div className='w-full p-2 border-b border-solid border-black'>
       <div className='animate-pulse flex items-center justify-between'>

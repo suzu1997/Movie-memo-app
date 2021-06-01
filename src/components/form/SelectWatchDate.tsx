@@ -1,6 +1,15 @@
-import { memo } from 'react';
+import { ChangeEventHandler, memo, VFC } from 'react';
 
-export const SelectWatchDate = memo((props) => {
+type Props = {
+  year: string;
+  month: string;
+  day: string;
+  onChangeYear: ChangeEventHandler<HTMLSelectElement>;
+  onChangeMonth: ChangeEventHandler<HTMLSelectElement>;
+  onChangeDay: ChangeEventHandler<HTMLSelectElement>;
+};
+
+export const SelectWatchDate: VFC<Props> = memo((props) => {
   const { year, month, day, onChangeYear, onChangeMonth, onChangeDay } = props;
 
   return (

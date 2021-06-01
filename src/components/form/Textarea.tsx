@@ -1,7 +1,14 @@
-import { memo } from 'react';
+import { ChangeEventHandler, memo, VFC } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
-export const Textarea = memo((props) => {
+type Props = {
+  label: string;
+  value: string;
+  onChange: ChangeEventHandler<HTMLTextAreaElement>;
+  placeholder: string;
+};
+
+export const Textarea: VFC<Props> = memo((props) => {
   const { label, value, onChange, placeholder } = props;
 
   return (

@@ -15,6 +15,7 @@
 
 - React 17.0.1
 - Next.js 10.0.9
+- TypeScript 4.3.2
 - Tailwind CSS 2.1.1
 - ESLint 7.26.0
 - firebase 8.4.3

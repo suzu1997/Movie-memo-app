@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import 'tailwindcss/tailwind.css';
+import  { Toaster } from 'react-hot-toast';
+
 
 import 'src/styles/globals.css';
 import { MovieContextProvider } from 'src/providers/SelectedMovieProvider';
@@ -19,6 +21,12 @@ const MyApp: VFC = ({ Component, pageProps }: AppProps) => {
       </Head>
       <MovieContextProvider>
         <Component {...pageProps} />
+        <Toaster 
+          position="top-center"
+          toastOptions={{
+            duration: 3000,
+          }}
+        />
       </MovieContextProvider>
     </div>
   );

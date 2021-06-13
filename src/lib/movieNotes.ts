@@ -1,5 +1,6 @@
 import { db } from 'src/firebase/index';
 import { MovieNoteData } from 'src/types/movieNoteData';
+import toast from 'react-hot-toast';
 
 //firestoreからmovieNotesのデータを取得する関数
 export const getMovieNotesData: () => Promise<Array<MovieNoteData>> = async () => {
@@ -79,10 +80,11 @@ export const createMovieNote: (data: MovieNoteData) => Promise<void> = async (
     .collection('movieNotes')
     .add(data)
     .then(() => {
-      alert('映画メモを作成しました。');
+      toast.success('映画メモを作成しました！');
     })
     .catch((err) => {
       console.log(err);
+      toast.error('映画メモの作成に失敗しました');
     });
 };
 
@@ -94,10 +96,11 @@ export const updateMovieNote: (data: MovieNoteData, id: string) => Promise<void>
       .doc(id)
       .set(data)
       .then(() => {
-        alert('映画メモを更新しました。');
+        toast.success('映画メモを更新しました！');
       })
       .catch((err) => {
         console.log(err);
+        toast.error('映画メモの更新に失敗しました');
       });
   };
 
@@ -108,10 +111,11 @@ export const deleteMovieNote: (id: string) => Promise<void> = async (id) => {
     .doc(id)
     .delete()
     .then(() => {
-      alert('映画メモを削除しました。');
+      toast.success('映画メモを削除しました！');
     })
     .catch((err) => {
       console.log(err);
+      toast.error('映画メモの削除に失敗しました');
     });
 };
 

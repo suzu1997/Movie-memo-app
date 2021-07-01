@@ -11,6 +11,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
     "plugin:react/recommended",
+    "next",
     "prettier"
   ],
   "ignorePatterns": ["build"],

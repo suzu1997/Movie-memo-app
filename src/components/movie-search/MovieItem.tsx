@@ -18,12 +18,13 @@ export const MovieItem: VFC<Props> = memo((props) => {
   const releaseYear: string = movie.release_date.slice(0, 4);
 
   return (
-    <Link href='/movie-work'>
+    <Link href='/movie-work' passHref>
       <div
         className='flex items-center justify-between px-3 py-2 border-b border-solid border-black cursor-pointer hover:bg-gray-100'
         onClick={selectMovie}
       >
         <div className='flex items-center'>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`}
             alt='サムネイル'

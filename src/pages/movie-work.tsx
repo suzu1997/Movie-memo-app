@@ -38,9 +38,11 @@ const MovieWork: VFC = () => {
       <Header />
       <div className='flex-grow w-4/5 max-w-lg pt-10'>
         <div className='flex justify-center'>
+          {/*  eslint-disable-next-line @next/next/no-img-element */}
           <img
             className='w-52 h-52 block border-2 border-solid border-gray-800'
             src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${selectedMovie.poster_path}`}
+            alt='サムネイル'
           />
           <div className='flex flex-col justify-center ml-3 sm:ml-10'>
             {/* 登録がまだの場合はmovie-note/newへ、登録済みの場合はmovie-note/[title]へ遷移*/}

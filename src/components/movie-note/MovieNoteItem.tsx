@@ -11,6 +11,7 @@ export const MovieNoteItem: VFC<Props> = memo((props) => {
   return (
     <div className='flex items-center justify-between'>
       <div className='flex items-center'>
+        {/*  eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={movieNote.src}
           alt='映画のサムネイル'

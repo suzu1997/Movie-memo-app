@@ -4,7 +4,7 @@ import { memo, VFC } from 'react';
 export const AddButton: VFC = memo(() => {
   return (
     <>
-      <Link href='/edit'>
+      <Link href='/edit' passHref>
         <button className='text-center leading-10 text-white bg-green-700 text-4xl font-bold rounded-full focus:outline-none w-14 h-14 fixed right-10 bottom-10 hover:bg-green-800 '>
           <svg
             xmlns='http://www.w3.org/2000/svg'

@@ -65,7 +65,7 @@ export const SignIn: VFC<Props> = (props) => {
           <input
             type='submit'
             value='ログイン'
-            className='text-white bg-green-700 text-xs sm:text-sm px-4 py-3 focus:outline-none rounded-lg hover:bg-opacity-90 w-20 m-auto mt-8'
+            className='text-white bg-green-700 text-center text-xs sm:text-sm px-4 py-3 focus:outline-none rounded-lg hover:bg-opacity-90 m-auto mt-8'
           />
         </form>
         <button className='text-blue-600 underline mt-4' onClick={() => setIsLogin(false)}>

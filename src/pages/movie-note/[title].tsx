@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, VFC } from 'react';
+import { useCallback, useContext, useEffect, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 
@@ -15,11 +15,14 @@ import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
 import { useMovieNote } from 'src/hooks/useMovieNote';
 import { MovieNoteButton } from 'src/components/movie-note/MovieNoteButton';
 import { MovieNoteData } from 'src/types/movieNoteData';
+import { AuthContext } from 'src/providers/AuthProvider';
 
 const MovieNote: VFC = ({
   initialData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
+  const { currentUserUid } = useContext(AuthContext);
+  
   const { movieNote, mutate, error } = useMovieNote(initialData);
 
   const [year, setYear] = useState(movieNote.year);
@@ -41,6 +44,7 @@ const MovieNote: VFC = ({
   }, []);
 
   const data: MovieNoteData = {
+    userId: `${currentUserUid}`,
     title: `${movieNote.title}`,
     src: `${movieNote.src}`,
     year: `${year}`,

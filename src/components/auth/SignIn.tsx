@@ -4,7 +4,7 @@ import { signinWithEmailAndPassword } from 'src/firebase/auth';
 
 type Props = {
   setIsLogin: (boolean: boolean) => void;
-}
+};
 
 type Inputs = {
   email: string;
@@ -19,9 +19,16 @@ export const SignIn: VFC<Props> = (props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = ({ email, passward }) => {
-    signinWithEmailAndPassword(email, passward);
-    console.log(email, passward);
+  const onSubmit: SubmitHandler<Inputs> = async ({ email, passward }) => {
+    try {
+      const user = await signinWithEmailAndPassword(email, passward);
+      if (!user) {
+        throw new Error('ログインに失敗しました');
+      }
+      console.log('ログインuser情報 : ', user);
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
@@ -30,7 +37,7 @@ export const SignIn: VFC<Props> = (props) => {
         <h1 className='font-bold text-lg mb-10'>ログイン</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='w-11/12 flex flex-col'
+          className='w-11/12 flex flex-col max-w-lg'
         >
           {/* register your input into the hook by invoking the "register" function */}
           <label>メールアドレス</label>
@@ -68,8 +75,11 @@ export const SignIn: VFC<Props> = (props) => {
             className='text-white bg-green-700 text-center text-xs sm:text-sm px-4 py-3 focus:outline-none rounded-lg hover:bg-opacity-90 m-auto mt-8'
           />
         </form>
-        <button className='text-blue-600 underline mt-4' onClick={() => setIsLogin(false)}>
-          新規登録はこちら
+        <button
+          className='text-blue-600 underline mt-5 hover:text-gray-600'
+          onClick={() => setIsLogin(false)}
+        >
+          ユーザー登録はこちら
         </button>
       </div>
     </>

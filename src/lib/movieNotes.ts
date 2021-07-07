@@ -3,11 +3,14 @@ import { MovieNoteData } from 'src/types/movieNoteData';
 import toast from 'react-hot-toast';
 
 //firestoreからmovieNotesのデータを取得する関数
-export const getMovieNotesData: () => Promise<Array<MovieNoteData>> = async () => {
+export const getMovieNotesData: (
+  currentUserUid: string
+) => Promise<Array<MovieNoteData>> = async (currentUserUid) => {
   const movieNotes = [];
   //非同期処理
   await db
     .collection('movieNotes')
+    .where('userId', '==', `${currentUserUid}`)
     .orderBy('watchDate')
     .get()
     //movieNotesの中身が全てsnapshotsとして取得される(ドキュメント)
@@ -89,20 +92,22 @@ export const createMovieNote: (data: MovieNoteData) => Promise<void> = async (
 };
 
 //映画メモのデータを変更する関数
-export const updateMovieNote: (data: MovieNoteData, id: string) => Promise<void> =
-  async (data, id) => {
-    await db
-      .collection('movieNotes')
-      .doc(id)
-      .set(data)
-      .then(() => {
-        toast.success('映画メモを更新しました！');
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error('映画メモの更新に失敗しました');
-      });
-  };
+export const updateMovieNote: (
+  data: MovieNoteData,
+  id: string
+) => Promise<void> = async (data, id) => {
+  await db
+    .collection('movieNotes')
+    .doc(id)
+    .set(data)
+    .then(() => {
+      toast.success('映画メモを更新しました！');
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error('映画メモの更新に失敗しました');
+    });
+};
 
 //映画メモを削除するための関数
 export const deleteMovieNote: (id: string) => Promise<void> = async (id) => {

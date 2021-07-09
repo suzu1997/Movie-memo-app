@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import 'tailwindcss/tailwind.css';
-import  { Toaster } from 'react-hot-toast';
-
+import { Toaster } from 'react-hot-toast';
 
 import 'src/styles/globals.css';
 import { MovieContextProvider } from 'src/providers/SelectedMovieProvider';
 import { VFC } from 'react';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
+import { AuthProvider } from 'src/providers/AuthProvider';
 
 const MyApp: VFC = ({ Component, pageProps }: AppProps) => {
   return (
@@ -19,15 +19,17 @@ const MyApp: VFC = ({ Component, pageProps }: AppProps) => {
           rel='stylesheet'
         />
       </Head>
-      <MovieContextProvider>
-        <Component {...pageProps} />
-        <Toaster 
-          position="top-center"
-          toastOptions={{
-            duration: 3000,
-          }}
-        />
-      </MovieContextProvider>
+      <AuthProvider>
+        <MovieContextProvider>
+          <Component {...pageProps} />
+          <Toaster
+            position='top-center'
+            toastOptions={{
+              duration: 3000,
+            }}
+          />
+        </MovieContextProvider>
+      </AuthProvider>
     </div>
   );
 };

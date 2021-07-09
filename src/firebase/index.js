@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/auth';
 import firebaseConfig from 'src/firebase/config'; //config.jsでexportした設定値
 
 // -------firestoreを使う準備--------//
@@ -10,3 +11,4 @@ if (!firebase.apps.length) {
 }
 //export
 export const db = firebase.firestore();
+export const auth = firebase.auth();

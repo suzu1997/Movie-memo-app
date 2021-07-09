@@ -1,22 +1,25 @@
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useContext, useEffect, useState, VFC } from 'react';
 import Link from 'next/link';
 
 import { MovieNoteItem } from 'src/components/movie-note/MovieNoteItem';
 import { SkeletonLoading } from 'src/components/SkeletonLoading';
 import { getMovieNotesData } from 'src/lib/movieNotes';
+import { AuthContext } from 'src/providers/AuthProvider';
 
 export const MovieNotesList: VFC= memo(() => {
   const [movieNotes, setMovieNotes] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const { currentUserUid } = useContext(AuthContext);
+
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const movieNotes = await getMovieNotesData();
+      const movieNotes = await getMovieNotesData(currentUserUid);
       setMovieNotes(movieNotes);
       setLoading(false);
     })();
-  }, []);
+  }, [currentUserUid]);
 
   return (
     <div className='flex flex-col w-11/12 max-w-screen-sm mx-auto my-8 p-0 min-h-full flex-grow'>

@@ -6,7 +6,7 @@ const firebaseConfig = {
   storageBucket: 'movie-notes-app.appspot.com',
   messagingSenderId: '1039347753078',
   appId: '1:1039347753078:web:9b77b720bfbe608b77bf57',
-  measurementId: 'G-Q484SLZTCQ',
+  measurementId: 'G-N81CFDQ3CE',
 };
 
 export default firebaseConfig;

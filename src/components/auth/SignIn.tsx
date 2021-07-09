@@ -43,7 +43,7 @@ export const SignIn: VFC<Props> = (props) => {
           <label>メールアドレス</label>
           <input
             className='w-full p-2 border-2 rounded-md border-gray-400 border-solid focus:outline-none focus:border-black'
-            placeholder='emailアドレスを入力してください'
+            placeholder='メールアドレスを入力してください'
             type='text'
             name='email'
             {...register('email', { required: true })}
@@ -72,11 +72,11 @@ export const SignIn: VFC<Props> = (props) => {
           <input
             type='submit'
             value='ログイン'
-            className='text-white bg-green-700 text-center text-xs sm:text-sm px-4 py-3 focus:outline-none rounded-lg hover:bg-opacity-90 m-auto mt-8'
+            className='text-white bg-green-700 text-center text-xs sm:text-sm px-4 py-3 focus:outline-none rounded-lg hover:bg-opacity-90 m-auto mt-6'
           />
         </form>
         <button
-          className='text-blue-600 underline mt-5 hover:text-gray-600'
+          className='text-blue-600 underline mt-6 hover:text-gray-600'
           onClick={() => setIsLogin(false)}
         >
           ユーザー登録はこちら

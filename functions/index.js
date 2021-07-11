@@ -1,8 +1,9 @@
-import { https } from 'firebase-functions';
-import { initializeApp, firestore } from 'firebase-admin';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
 
-initializeApp(); //adminを初期化
-const db = firestore(); //admin権限でfirestoreを操作
+admin.initializeApp(); //adminを初期化
+const db = admin.firestore(); //admin権限でfirestoreを操作
 //定数dbに入れておくことで使い回しできる。
 
 //レスポンスを返すための関数
@@ -13,7 +14,7 @@ const sendResponse = (response, statusCode, body) => {
   });
 };
 
-export const addDataset = https.onRequest(
+exports.addDataset = functions.https.onRequest(
   // コールバック関数
   async (req, res) => {
     // req.methodが"POST"のじゃない時はエラーを返す

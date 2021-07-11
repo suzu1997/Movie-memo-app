@@ -14,8 +14,13 @@ export const AuthProvider: FC = (props) => {
   useEffect(() => {
     // ログイン状態が変化するとfirebaseのauthメソッドを呼び出す
     auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      setCurrentUserUid(user.uid);
+      if (user) {
+        setCurrentUser(user);
+        setCurrentUserUid(user.uid);
+      } else {
+        setCurrentUser(undefined);
+        setCurrentUserUid(undefined);
+      }
     });
   }, []);
 

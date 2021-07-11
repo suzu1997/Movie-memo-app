@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState, VFC } from 'react';
-import firebase from 'firebase';
 
 import { Footer } from 'src/components/layout/Footer';
 import { Header } from 'src/components/layout/Header';
@@ -8,7 +7,6 @@ import { MovieNotesList } from 'src/components/movie-note/MovieNotesList';
 import { SearchArea } from 'src/components/movie-search/SearchArea';
 import { SearchResult } from 'src/components/movie-search/SearchResult';
 import { AuthContext } from 'src/providers/AuthProvider';
-import { db } from 'src/firebase';
 
 const Home: VFC = () => {
   const router = useRouter();
@@ -24,19 +22,7 @@ const Home: VFC = () => {
   useEffect(() => {
     if (!currentUser) {
       router.push('/top');
-    } else {
-      (async () => {
-        const userDoc = await db.collection('users').doc(currentUser.uid).get();
-        if (!userDoc.exists) {
-          // Firestore にユーザー用のドキュメントが作られていなければ作る
-          await userDoc.ref.set({
-            userId: currentUser.uid,
-            email: currentUser.email,
-            created_at: firebase.firestore.FieldValue.serverTimestamp(),
-          });
-        }
-      })();
-    }
+    } 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 

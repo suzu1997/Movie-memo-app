@@ -25,7 +25,6 @@ export const SignIn: VFC<Props> = (props) => {
       if (!user) {
         throw new Error('ログインに失敗しました');
       }
-      console.log('ログインuser情報 : ', user);
     } catch (error) {
       alert(error.message);
     }

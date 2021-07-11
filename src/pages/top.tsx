@@ -24,7 +24,6 @@ const Top: VFC = () => {
       if (!user) {
         throw new Error('ゲストログインに失敗しました');
       }
-      console.log('ログインuser情報 : ', user);
     } catch (error) {
       alert(error.message);
     }

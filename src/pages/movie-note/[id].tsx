@@ -8,7 +8,7 @@ import { DeleteConfirmDialog } from 'src/components/DeleteConfirmDialog';
 import {
   deleteMovieNote,
   getMovieNoteData,
-  getMovieNotesTitles,
+  getMovieNotesIds,
   updateMovieNote,
 } from 'src/lib/movieNotes';
 import { MovieNoteForm } from 'src/components/movie-note/MovieNoteForm';
@@ -59,7 +59,7 @@ const MovieNote: VFC = ({
   const onClickUpdate: () => void = useCallback(async () => {
     const id = initialData.id;
     await updateMovieNote(data, id);
-    mutate(['movieNotes', initialData.title]);
+    mutate(['movieNotes', initialData.id]);
     router.push('/');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
@@ -68,13 +68,13 @@ const MovieNote: VFC = ({
   const onClickDelete: () => void = useCallback(async () => {
     const id = initialData.id;
     await deleteMovieNote(id);
-    mutate(['movieNotes', initialData.title]);
+    mutate(['movieNotes', initialData.id]);
     router.push('/');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   useEffect(() => {
-    mutate(['movieNotes', initialData.title]);
+    mutate(['movieNotes', initialData.id]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -114,21 +114,21 @@ const MovieNote: VFC = ({
   );
 };
 
-//titleのとりうる値のリストを返す
+//idのとりうる値のリストを返す
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getMovieNotesTitles();
+  const paths = await getMovieNotesIds();
   return {
     paths,
     fallback: 'blocking',
   };
 };
 
-//titleに基づいて必要なデータを取得
+//idに基づいて必要なデータを取得
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const initialData = await getMovieNoteData(params.title);
+  const initialData = await getMovieNoteData(params.id);
   return {
     props: {
-      initialData,
+      initialData
     },
     revalidate: 5,
   };

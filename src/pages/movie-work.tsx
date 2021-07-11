@@ -45,9 +45,9 @@ const MovieWork: VFC = () => {
             alt='サムネイル'
           />
           <div className='flex flex-col justify-center ml-3 sm:ml-10'>
-            {/* 登録がまだの場合はmovie-note/newへ、登録済みの場合はmovie-note/[title]へ遷移*/}
+            {/* 登録がまだの場合はmovie-note/newへ、登録済みの場合はmovie-note/[id]へ遷移*/}
             {movieNoteExist ? (
-              <Link href={`/movie-note/${movieNote[0].title}`} passHref>
+              <Link href={`/movie-note/${movieNote[0].id}`} passHref>
                 <a>
                   <PrimaryButton>
                     noteを作成済 <br />

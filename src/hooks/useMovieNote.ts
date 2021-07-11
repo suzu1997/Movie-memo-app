@@ -8,8 +8,8 @@ export const useMovieNote = (initialData: MovieNoteData): any => {
     mutate,
     error,
   } = useSWR(
-    ['movieNotes', initialData.title],
-    () => getMovieNoteData(initialData.title),
+    ['movieNotes', initialData.id],
+    () => getMovieNoteData(initialData.id),
     {
       initialData: initialData,
       revalidateOnMount: true,

@@ -1,79 +1,61 @@
 import { db } from 'src/firebase/index';
 import { MovieNoteData } from 'src/types/movieNoteData';
 import toast from 'react-hot-toast';
+import { auth } from 'src/firebase/index';
 
 //firestoreからmovieNotesのデータを取得する関数
 export const getMovieNotesData: (
-  currentUserUid: string
+  currentUserUid
 ) => Promise<Array<MovieNoteData>> = async (currentUserUid) => {
   const movieNotes = [];
   //非同期処理
-  await db
+  const snapshots = await db
     .collection('movieNotes')
-    .where('userId', '==', `${currentUserUid}`)
+    .where('userId', '==', currentUserUid)
     .orderBy('watchDate')
-    .get()
-    //movieNotesの中身が全てsnapshotsとして取得される(ドキュメント)
-    .then((snapshots) => {
-      snapshots.forEach((doc) => {
-        //ドキュメントを一つずつ取り出す
-        // const id = doc.id; //それぞれのドキュメントキー(id)
-        const data = doc.data(); //中身のデータ  それぞのオブジェクト
-        movieNotes.push(data);
-      });
-    });
+    .get();
+  //movieNotesの中身が全てsnapshotsとして取得される(ドキュメント)
+  snapshots.forEach((doc) => {
+    //ドキュメントを一つずつ取り出す
+    const id = doc.id; //それぞれのドキュメントキー(id)
+    const data = doc.data(); //中身のデータ  それぞのオブジェクト
+    movieNotes.push({...data, id: String(id)});
+  });
   return movieNotes;
 };
 
-//titleの一覧を取得するための関数
-export const getMovieNotesTitles: () => Promise<
-  {
-    params: {
-      title: string;
-    };
-  }[]
+//idの一覧を取得するための関数
+export const getMovieNotesIds: () => Promise<
+{
+  params: {
+    id: string;
+  };
+}[]
 > = async () => {
-  const movieNotes = [];
-  await db
+  const ids = []; 
+  const snapshots = await db
     .collection('movieNotes')
-    .get()
-    //movieNotesの中身が全てsnapshotsとして取得される(ドキュメント)
-    .then((snapshots) => {
-      snapshots.forEach((doc) => {
-        const data = doc.data();
-        //中身のデータ  それぞれのオブジェクト
-        movieNotes.push(data);
-      });
-    });
-  return movieNotes.map((movieNote) => {
+    .get();
+  snapshots.forEach((doc) => {
+    const id = doc.id;
+    ids.push(id);
+  });
+  return ids.map((id) => {
     return {
       params: {
-        title: String(movieNote.title),
+        id: String(id),
       },
     };
   });
 };
 
-//特定のtitleを使って、データベースからデータを取得するための関数
-export const getMovieNoteData: (title: string | string[]) => Promise<any> =
-  async (title) => {
-    let movieNote;
-    let id;
-    await db
-      .collection('movieNotes')
-      .where('title', '==', title)
-      .get()
-      .then((snapshots) => {
-        snapshots.forEach((doc) => {
-          const data = doc.data();
-          id = doc.id;
-          //中身のデータ  それぞれのオブジェクト
-          movieNote = data;
-        });
-      });
+//特定のidを使って、データベースからデータを取得するための関数
+export const getMovieNoteData: (id) => Promise<any> = async (id) => {
+  const doc = await db.collection('movieNotes').doc(id).get();
+  const movieNote = doc.data();
 
-    return { ...movieNote, id: String(id) };
-  };
+  return { ...movieNote, id: String(id) };
+};
 
 //映画メモを作成するための関数
 export const createMovieNote: (data: MovieNoteData) => Promise<void> = async (
@@ -127,15 +109,14 @@ export const deleteMovieNote: (id: string) => Promise<void> = async (id) => {
 export const searchMovieNote: (title: string) => Promise<Array<MovieNoteData>> =
   async (title) => {
     const movieNote = [];
-    await db
+    const snapshots = await db
       .collection('movieNotes')
+      .where('userId', '==', auth.currentUser.uid)
       .where('title', '==', title)
-      .get()
-      .then((snapshots) => {
-        snapshots.forEach((doc) => {
-          const data = doc.data();
-          movieNote.push(data);
-        });
+      .get();
+      snapshots.forEach((doc) => {
+        const data = doc.data();
+        movieNote.push(data);
       });
     return movieNote;
   };

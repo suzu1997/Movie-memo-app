@@ -1,11 +1,14 @@
 import Link from 'next/link';
-import { memo, useCallback, VFC } from 'react';
+import { memo, useCallback, useContext, VFC } from 'react';
 import { useRouter } from 'next/router';
 
 import { SignOutButton } from 'src/components/button/SignOutButton';
 import { signOut } from 'src/firebase/auth';
+import { AuthContext } from 'src/providers/AuthProvider';
 
 export const Header: VFC = memo(() => {
+  const { currentUser } = useContext(AuthContext);
+
   const router = useRouter();
   const onClickSignOutButton = useCallback(() => {
     signOut();
@@ -19,9 +22,9 @@ export const Header: VFC = memo(() => {
           <i className='fas fa-film'></i> <p className='ml-1'>ムビラブ！！</p>
         </div>
       </Link>
-      {router.pathname === '/top' ? null : (
+      {currentUser ? (
         <SignOutButton onClick={onClickSignOutButton}>ログアウト</SignOutButton>
-      )}
+      ) : null}
     </header>
   );
 });

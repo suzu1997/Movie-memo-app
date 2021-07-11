@@ -1,5 +1,7 @@
 import { VFC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import firebase from 'firebase';
+import { db } from 'src/firebase';
 
 import { signUpWithEmailAndPassword } from 'src/firebase/auth';
 
@@ -26,7 +28,15 @@ export const SignUp: VFC<Props> = (props) => {
       if (!user) {
         throw new Error('ユーザー登録に失敗しました');
       }
-      console.log('登録user情報 : ', user);
+      const userDoc = await db.collection('users').doc(user.user.uid).get();
+      if (!userDoc.exists) {        
+        // Firestore にユーザー用のドキュメントが作られていなければ作る
+        await userDoc.ref.set({
+          userId: user.user.uid,
+          email: user.user.email,
+          created_at: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+      }
     } catch (error) {
       alert(error.message);
     }

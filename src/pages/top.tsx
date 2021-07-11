@@ -8,6 +8,7 @@ import { SignUp } from 'src/components/auth/SignUp';
 import { SignIn } from 'src/components/auth/SignIn';
 import { AuthContext } from 'src/providers/AuthProvider';
 import { signinWithEmailAndPassword } from 'src/firebase/auth';
+import toast from 'react-hot-toast';
 
 const Top: VFC = () => {
   const { currentUser } = useContext(AuthContext);
@@ -25,7 +26,7 @@ const Top: VFC = () => {
         throw new Error('ゲストログインに失敗しました');
       }
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 

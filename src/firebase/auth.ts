@@ -1,4 +1,5 @@
 import { auth } from 'src/firebase/index';
+import toast from 'react-hot-toast';
 
 export const signUpWithEmailAndPassword = async (
   email: string,
@@ -9,11 +10,11 @@ export const signUpWithEmailAndPassword = async (
     if (!user) {
       throw new Error('新規登録に失敗しました');
     }
-    alert('新規登録に成功しました');
+    toast.success('新規登録が完了しました');
     
     return user;
   } catch (error) {
-    alert(error.message);
+    toast.error(error.message);
   }
 };
 
@@ -24,22 +25,22 @@ export const signinWithEmailAndPassword = async (
   try {
     const user = await auth.signInWithEmailAndPassword(email, password);
     if (!user) {
-      throw new Error('ログインに失敗しました');
+      throw new Error('ログインできませんでした');
     }
-    alert('ログイン成功');
+    toast.success('ログインしました');
     
     return user;
   } catch (error) {
-    alert(error.message);
+    toast.error(error.message);
   }
 };
 
 export const signOut = async (): Promise<void> => {
   try {
     await auth.signOut();
-    alert('サインアウト成功'); 
+    toast.success('ログアウトしました'); 
   } catch (error) {
-    alert('サインアウト失敗');
+    toast.error('ログアウトできませんでした');
     console.log(error);
   }
 };

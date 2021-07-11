@@ -26,6 +26,10 @@ const Home: VFC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
+  if (!currentUser) {
+    return <div>Loadng...</div>;
+  }
+
   return (
     <div className='min-h-screen p-0 flex flex-col items-center'>
       <Header />

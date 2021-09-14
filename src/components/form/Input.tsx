@@ -4,7 +4,7 @@ type Props = {
   type: string;
   label: string;
   value: string;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
   readOnly?: boolean;
 };

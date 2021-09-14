@@ -68,7 +68,8 @@ export const MovieNoteForm: VFC<Props> = (props) => {
 
   return (
     <div>
-      <Input type='text' label='タイトル' value={value} readOnly={true} />
+      <div>タイトル:</div>
+      <p className='w-full p-2 border-2 rounded-md border-gray-400 border-solid focus:outline-none focus:border-black'>{value}</p>
       <br />
       <SelectWatchDate
         year={year}

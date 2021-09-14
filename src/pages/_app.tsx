@@ -2,11 +2,10 @@ import Head from 'next/head';
 import 'tailwindcss/tailwind.css';
 import { Toaster } from 'react-hot-toast';
 
-import 'src/styles/globals.css';
 import { MovieContextProvider } from 'src/providers/SelectedMovieProvider';
 import { VFC } from 'react';
-import { AppProps } from 'next/dist/next-server/lib/router/router';
 import { AuthProvider } from 'src/providers/AuthProvider';
+import { AppProps } from 'next/dist/shared/lib/router/router';
 
 const MyApp: VFC = ({ Component, pageProps }: AppProps) => {
   return (

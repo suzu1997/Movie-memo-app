@@ -3,7 +3,7 @@ import { memo, useCallback, useContext, VFC } from 'react';
 import { useRouter } from 'next/router';
 
 import { SignOutButton } from 'src/components/button/SignOutButton';
-import { signOut } from 'src/firebase/auth';
+import { signout } from 'src/firebase/auth';
 import { AuthContext } from 'src/providers/AuthProvider';
 
 export const Header: VFC = memo(() => {
@@ -11,7 +11,7 @@ export const Header: VFC = memo(() => {
 
   const router = useRouter();
   const onClickSignOutButton = useCallback(() => {
-    signOut();
+    signout();
     router.push('/top');
   }, [router]);
 
